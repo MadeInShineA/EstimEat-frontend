@@ -1,8 +1,8 @@
 name;score;version
 Rougemont;111.0;1
 Torricella-Taverne;75.0;1
-Fontenais;38.0;1
 Soazza;38.0;1
+Fontenais;38.0;1
 Bottens;37.0;1
 Zernez;28.0;1
 Collombey-Muraz;26.0;1
@@ -15,8 +15,8 @@ Gletterens;22.0;1
 Porrentruy;22.0;1
 Oftringen;22.0;1
 Lausen;21.0;1
-Malans;21.0;1
 Randa;21.0;1
+Malans;21.0;1
 Biberist;21.0;1
 Avers;21.0;1
 Altdorf (UR);20.0;1
@@ -88,8 +88,8 @@ Rickenbach (ZH);13.0;1
 Amriswil;13.0;1
 Balsthal;13.0;1
 Manno;12.0;1
-Savigny;12.0;1
 Sattel;12.0;1
+Savigny;12.0;1
 Val-de-Charmey;12.0;1
 Bergün Filisur;12.0;1
 Savièse;12.0;1
@@ -136,8 +136,8 @@ La Neuveville;11.0;1
 Udligenswil;11.0;1
 Eschenbach (LU);11.0;1
 Utzenstorf;11.0;1
-Lostorf;11.0;1
 Bättwil;11.0;1
+Lostorf;11.0;1
 Genève;11.0;1
 Eggenwil;11.0;1
 Fiez;11.0;1
@@ -148,8 +148,8 @@ Rossa;10.0;1
 Massongex;10.0;1
 Lamone;10.0;1
 San Vittore;10.0;1
-Crans (VD);10.0;1
 Muolen;10.0;1
+Crans (VD);10.0;1
 Lens;10.0;1
 Buchs (AG);10.0;1
 Marbach (SG);10.0;1
@@ -172,8 +172,8 @@ Hofstetten bei Brienz;9.0;1
 Jorat-Mézières;9.0;1
 Biel/Bienne;9.0;1
 Thônex;9.0;1
-Stein (AR);9.0;1
 Schenkon;9.0;1
+Stein (AR);9.0;1
 Le Chenit;9.0;1
 Giornico;9.0;1
 Rüttenen;9.0;1
@@ -235,10 +235,10 @@ Safenwil;8.0;1
 Laufen;8.0;1
 Sachseln;8.0;1
 Dielsdorf;8.0;1
-Bellevue;8.0;1
 Rue;8.0;1
-Lohn (SH);8.0;1
+Bellevue;8.0;1
 Herznach-Ueken;8.0;1
+Lohn (SH);8.0;1
 Wattwil;8.0;1
 Unterentfelden;8.0;1
 Crans-Montana;8.0;1
@@ -275,10 +275,10 @@ Lancy;7.0;1
 Bellwald;7.0;1
 Rebstein;7.0;1
 Homburg;7.0;1
-Krauchthal;7.0;1
+Mörigen;7.0;1
 Regensberg;7.0;1
 Crassier;7.0;1
-Mörigen;7.0;1
+Krauchthal;7.0;1
 Hofstetten-Flüh;7.0;1
 Castel San Pietro;7.0;1
 Broc;7.0;1
@@ -294,14 +294,14 @@ Ersigen;7.0;1
 Degersheim;7.0;1
 Riviera;7.0;1
 Steffisburg;7.0;1
-Sutz-Lattrigen;7.0;1
 Grüningen;7.0;1
 Himmelried;7.0;1
+Sutz-Lattrigen;7.0;1
 Simplon;7.0;1
 Stammheim;7.0;1
 Echallens;7.0;1
-Aarwangen;7.0;1
 Surpierre;7.0;1
+Aarwangen;7.0;1
 Churwalden;7.0;1
 Unterkulm;7.0;1
 Hägglingen;7.0;1
@@ -314,10 +314,10 @@ La Chaux-de-Fonds;6.0;1
 Schübelbach;6.0;1
 Metzerlen-Mariastein;6.0;1
 Bischofszell;6.0;1
-Genolier;6.0;1
-Villars-le-Terroir;6.0;1
 Hindelbank;6.0;1
 Moiry;6.0;1
+Villars-le-Terroir;6.0;1
+Genolier;6.0;1
 Davos;6.0;1
 Bussnang;6.0;1
 Saint-Imier;6.0;1
@@ -352,9 +352,9 @@ Hausen am Albis;6.0;1
 Au (SG);6.0;1
 Biasca;6.0;1
 Troistorrents;6.0;1
+Matran;6.0;1
 Le Vaud;6.0;1
 Gisikon;6.0;1
-Matran;6.0;1
 Emmen;6.0;1
 Unterengstringen;6.0;1
 Poschiavo;6.0;1
@@ -401,11 +401,11 @@ Ascona;5.0;1
 Widnau;5.0;1
 Cudrefin;5.0;1
 Köniz;5.0;1
+Port;5.0;1
+Corbeyrier;5.0;1
 Linden;5.0;1
 Stalden (VS);5.0;1
-Corbeyrier;5.0;1
 Altishofen;5.0;1
-Port;5.0;1
 Luterbach;5.0;1
 Muriaux;5.0;1
 Melide;5.0;1
@@ -413,8 +413,8 @@ Pfyn;5.0;1
 Roggwil (BE);5.0;1
 Weesen;5.0;1
 Arth;5.0;1
-Steinerberg;5.0;1
 Walterswil (BE);5.0;1
+Steinerberg;5.0;1
 Teufen (AR);5.0;1
 Arosa;5.0;1
 Sils im Engadin/Segl;5.0;1
@@ -443,9 +443,9 @@ Locarno;5.0;1
 Wünnewil-Flamatt;5.0;1
 Bülach;5.0;1
 Brig-Glis;5.0;1
-Birmenstorf (AG);5.0;1
 Hagenbuch;5.0;1
 Anières;5.0;1
+Birmenstorf (AG);5.0;1
 Andelfingen;5.0;1
 Münsterlingen;5.0;1
 Weggis;5.0;1
@@ -458,11 +458,11 @@ Courtételle;4.0;1
 Inkwil;4.0;1
 Kreuzlingen;4.0;1
 Val-de-Ruz;4.0;1
-Prez;4.0;1
-Saint-Saphorin (Lavaux);4.0;1
 Ergisch;4.0;1
-Trüllikon;4.0;1
 Vordemwald;4.0;1
+Trüllikon;4.0;1
+Saint-Saphorin (Lavaux);4.0;1
+Prez;4.0;1
 Veytaux;4.0;1
 Binningen;4.0;1
 Wetzikon (ZH);4.0;1
@@ -520,14 +520,14 @@ Oberdiessbach;4.0;1
 Lupfig;3.0;1
 Vex;3.0;1
 Unteriberg;3.0;1
-Leuzigen;3.0;1
 Eggerberg;3.0;1
 Wynigen;3.0;1
+Leuzigen;3.0;1
 Uitikon;3.0;1
 Zürich;3.0;1
-Romainmôtier-Envy;3.0;1
-Trubschachen;3.0;1
 Winkel;3.0;1
+Trubschachen;3.0;1
+Romainmôtier-Envy;3.0;1
 Avenches;3.0;1
 Laufen-Uhwiesen;3.0;1
 Cureglia;3.0;1
@@ -554,9 +554,9 @@ Waldenburg;3.0;1
 Faido;3.0;1
 Scuol;3.0;1
 Steckborn;3.0;1
-Trient;3.0;1
-Marthalen;3.0;1
 Flumenthal;3.0;1
+Marthalen;3.0;1
+Trient;3.0;1
 Kirchlindach;3.0;1
 Reichenbach im Kandertal;3.0;1
 Clos du Doubs;3.0;1
@@ -572,11 +572,11 @@ Ingenbohl;3.0;1
 Wyssachen;3.0;1
 Montagny-près-Yverdon;3.0;1
 Eischoll;3.0;1
-Hergiswil bei Willisau;3.0;1
-Bösingen;3.0;1
-Corseaux;3.0;1
-Champagne;3.0;1
 Boussens;3.0;1
+Bösingen;3.0;1
+Champagne;3.0;1
+Hergiswil bei Willisau;3.0;1
+Corseaux;3.0;1
 Leuggern;3.0;1
 Horw;3.0;1
 Flims;3.0;1
@@ -584,8 +584,8 @@ Leytron;3.0;1
 Uznach;3.0;1
 Rapperswil (BE);3.0;1
 Flaach;3.0;1
-Neunkirch;3.0;1
 Iseltwald;3.0;1
+Neunkirch;3.0;1
 Saint-Maurice;3.0;1
 Wilchingen;3.0;1
 Obersiggenthal;3.0;1
@@ -602,12 +602,12 @@ Killwangen;3.0;1
 Nesslau;3.0;1
 Lützelflüh;3.0;1
 Messen;3.0;1
-Varen;3.0;1
-Perroy;3.0;1
-Rüfenach;3.0;1
 Fisibach;3.0;1
 Remigen;3.0;1
+Rüfenach;3.0;1
 Echandens;3.0;1
+Varen;3.0;1
+Perroy;3.0;1
 Wettswil am Albis;3.0;1
 Riehen;3.0;1
 Trub;3.0;1
@@ -641,8 +641,8 @@ Minusio;3.0;1
 Wäldi;3.0;1
 Montricher;3.0;1
 Vechigen;3.0;1
-St. Stephan;3.0;1
 Le Noirmont;3.0;1
+St. Stephan;3.0;1
 Wolhusen;2.0;1
 Gambarogno;2.0;1
 Göschenen;2.0;1
@@ -654,8 +654,8 @@ Bassersdorf;2.0;1
 Grosswangen;2.0;1
 Wolfwil;2.0;1
 Teufenthal (AG);2.0;1
-Tannay;2.0;1
 Rohrbachgraben;2.0;1
+Tannay;2.0;1
 Erlenbach im Simmental;2.0;1
 Hüttwilen;2.0;1
 Krattigen;2.0;1
@@ -668,8 +668,8 @@ Untervaz;2.0;1
 Solothurn;2.0;1
 Kemmental;2.0;1
 Würenlos;2.0;1
-Gollion;2.0;1
 Rorbas;2.0;1
+Gollion;2.0;1
 Martigny-Combe;2.0;1
 Satigny;2.0;1
 Rorschach;2.0;1
@@ -693,14 +693,14 @@ Birsfelden;2.0;1
 Klosters;2.0;1
 Terre di Pedemonte;2.0;1
 Kallnach;2.0;1
-Cugy (FR);2.0;1
 Subingen;2.0;1
+Cugy (FR);2.0;1
 Obergösgen;2.0;1
 Brügg;2.0;1
 Renens (VD);2.0;1
 Gansingen;2.0;1
-Lommis;2.0;1
 Puplinge;2.0;1
+Lommis;2.0;1
 Kandersteg;2.0;1
 Berikon;2.0;1
 Horgen;2.0;1
@@ -723,8 +723,8 @@ Morcote;2.0;1
 Rorschacherberg;2.0;1
 Schaffhausen;2.0;1
 Däniken;2.0;1
-Densbüren;2.0;1
 Oetwil am See;2.0;1
+Densbüren;2.0;1
 Riggisberg;2.0;1
 Fläsch;2.0;1
 Urnäsch;2.0;1
@@ -735,37 +735,37 @@ Chiasso;1.0;1
 Gränichen;1.0;1
 Steinmaur;1.0;1
 Seedorf (BE);1.0;1
-Hemishofen;1.0;1
 Rances;1.0;1
+Hemishofen;1.0;1
 Assens;1.0;1
 Menzingen;1.0;1
 Wildhaus-Alt St. Johann;1.0;1
 Ettiswil;1.0;1
 Realp;1.0;1
+Salenstein;1.0;1
 Bosco/Gurin;1.0;1
 Bissone;1.0;1
-Salenstein;1.0;1
 Schöftland;1.0;1
-Origlio;1.0;1
 Santa Maria in Calanca;1.0;1
-Rubigen;1.0;1
 Altnau;1.0;1
-Furna;1.0;1
 Bönigen;1.0;1
+Origlio;1.0;1
+Furna;1.0;1
+Rubigen;1.0;1
 Serravalle;1.0;1
 Ecublens (VD);1.0;1
 Cugnasco-Gerra;1.0;1
 Berg (TG);1.0;1
 Leysin;1.0;1
 Kirchberg (SG);1.0;1
-Etoy;1.0;1
 Jenaz;1.0;1
+Etoy;1.0;1
 Mont-Noble;1.0;1
 Neuhausen am Rheinfall;1.0;1
 Oberembrach;1.0;1
-Vacallo;1.0;1
 Wiedlisbach;1.0;1
 Dürrenroth;1.0;1
+Vacallo;1.0;1
 Sigriswil;1.0;1
 Unterschächen;1.0;1
 Rudolfstetten-Friedlisberg;1.0;1
@@ -789,25 +789,25 @@ Gelterkinden;1.0;1
 Vals;1.0;1
 Oberdorf (BL);1.0;1
 Sainte-Croix;1.0;1
-Arch;1.0;1
-Vinelz;1.0;1
-Montagny (FR);1.0;1
-Trimmis;1.0;1
-Pieterlen;1.0;1
-Soubey;1.0;1
-Kaufdorf;1.0;1
-Bassins;1.0;1
 Strengelbach;1.0;1
-Eiken;1.0;1
+Pieterlen;1.0;1
+Kaufdorf;1.0;1
+Vinelz;1.0;1
 Eclépens;1.0;1
+Bassins;1.0;1
+Soubey;1.0;1
+Arch;1.0;1
+Montagny (FR);1.0;1
+Eiken;1.0;1
+Trimmis;1.0;1
 Saint-Gingolph;1.0;1
 Hauptwil-Gottshaus;1.0;1
 Matzingen;1.0;1
 Laupen;1.0;1
 Villars-sur-Glâne;1.0;1
 Romanel-sur-Lausanne;1.0;1
-Bleienbach;1.0;1
 Eriswil;1.0;1
+Bleienbach;1.0;1
 Diemtigen;1.0;1
 Zillis-Reischen;1.0;1
 Münchwilen (TG);1.0;1
@@ -864,15 +864,15 @@ Weiningen (ZH);1.0;1
 Val de Bagnes;1.0;1
 Airolo;1.0;1
 Herzogenbuchsee;1.0;1
-Reisiswil;1.0;1
 Dittingen;1.0;1
+Reisiswil;1.0;1
 Bremgarten (AG);1.0;1
 Bachenbülach;0.0;1
 Amlikon-Bissegg;0.0;1
 Rümlang;0.0;1
 Val Mara;0.0;1
-Lavey-Morcles;0.0;1
 Rothenfluh;0.0;1
+Lavey-Morcles;0.0;1
 Sagogn;0.0;1
 Uster;0.0;1
 Hauterive (FR);0.0;1
@@ -890,13 +890,13 @@ Bonstetten;0.0;1
 Stein am Rhein;0.0;1
 Villmergen;0.0;1
 Burgdorf;0.0;1
-Döttingen;0.0;1
 Walchwil;0.0;1
-Agarn;0.0;1
+Döttingen;0.0;1
+Meierskappel;0.0;1
+Sins;0.0;1
 Kriegstetten;0.0;1
 Walperswil;0.0;1
-Sins;0.0;1
-Meierskappel;0.0;1
+Agarn;0.0;1
 Embrach;0.0;1
 Yvonand;0.0;1
 Schattdorf;0.0;1
@@ -927,8 +927,8 @@ Orvin;0.0;1
 Orsières;0.0;1
 Merenschwand;0.0;1
 Moudon;0.0;1
-Hautemorges;0.0;1
 Heimiswil;0.0;1
+Hautemorges;0.0;1
 Frutigen;0.0;1
 Oberbuchsiten;0.0;1
 Biberstein;0.0;1
@@ -1002,87 +1002,464 @@ Hergiswil (NW);0.0;1
 Emmetten;0.0;1
 Untersiggenthal;0.0;1
 Küssnacht (SZ);0.0;1
-Beinwil (SO);0.0;1
-Bioggio;0.0;1
-Morbio Inferiore;0.0;1
-Montpreveyres;0.0;1
-Niederbüren;0.0;1
-Meinisberg;0.0;1
-Oberengstringen;0.0;1
-Bitsch;0.0;1
-Mauborget;0.0;1
-Bellikon;0.0;1
-Wattenwil;0.0;1
-Dinhard;0.0;1
-Renan (BE);0.0;1
-Kiesen;0.0;1
-Wildberg;0.0;1
-Willadingen;0.0;1
-Fahy;0.0;1
-Pohlern;0.0;1
-Thierachern;0.0;1
-Cartigny;0.0;1
-Castaneda;0.0;1
-Treycovagnes;0.0;1
-Trun;0.0;1
-Tschugg;0.0;1
-Courtelary;0.0;1
-Jonschwil;0.0;1
-Jens;0.0;1
-Liedertswil;0.0;1
-Rain;0.0;1
-Presinge;0.0;1
-Recherswil;0.0;1
-Küblis;0.0;1
-Cerentino;0.0;1
-Kippel;0.0;1
-Stadel;0.0;1
-Savosa;0.0;1
-Greng;0.0;1
-Schmitten (FR);0.0;1
-Grellingen;0.0;1
-Schwellbrunn;0.0;1
-Schlatt (ZH);0.0;1
-Evionnaz;0.0;1
-Nebikon;0.0;1
-Wichtrach;0.0;1
-Chénens;0.0;1
-Develier;0.0;1
-Essertines-sur-Yverdon;0.0;1
-Lully (FR);0.0;1
-Lohn-Ammannsegg;0.0;1
-Oltingen;0.0;1
-Bournens;0.0;1
-Brislach;0.0;1
-Lumino;0.0;1
-Hirschthal;0.0;1
-Birrwil;0.0;1
-Vaulruz;0.0;1
-Veltheim (AG);0.0;1
-Ropraz;0.0;1
-Därstetten;0.0;1
-Drei Höfe;0.0;1
-Liddes;0.0;1
-Eppenberg-Wöschnau;0.0;1
 Rottenschwil;0.0;1
-Rumisberg;0.0;1
-Hochwald;0.0;1
+Corsier (GE);0.0;1
+Rothenbrunnen;0.0;1
+Corsier-sur-Vevey;0.0;1
+Buchberg;0.0;1
+Dottikon;0.0;1
+Doppleschwand;0.0;1
+Donneloye;0.0;1
+Landiswil;0.0;1
 Grandvillard;0.0;1
 Grandval;0.0;1
-Givrins;0.0;1
-Fischbach;0.0;1
-Menznau;0.0;1
-Oberlangenegg;0.0;1
-Bolken;0.0;1
+Ausserberg;0.0;1
+Grandcour;0.0;1
+Grolley-Ponthaux;0.0;1
+Avully;0.0;1
+Bannwil;0.0;1
+Ballaigues;0.0;1
+Vinzel;0.0;1
+Villars-Sainte-Croix;0.0;1
+Villnachern;0.0;1
+Villars-sous-Yens;0.0;1
+Cottens (FR);0.0;1
 Salgesch;0.0;1
-Aegerten;0.0;1
+Saint-Oyens;0.0;1
+Fétigny;0.0;1
+Féchy;0.0;1
+Full-Reuenthal;0.0;1
+Fräschels;0.0;1
+Buchholterberg;0.0;1
+Bretzwil;0.0;1
+Bretonnières;0.0;1
+Bretigny-sur-Morrens;0.0;1
+Breitenbach;0.0;1
+Brittnau;0.0;1
+Walliswil bei Niederbipp;0.0;1
+Cuarny;0.0;1
+Roggliswil;0.0;1
+Ropraz;0.0;1
+Rongellen;0.0;1
+Brislach;0.0;1
+Buch am Irchel;0.0;1
+Brütten;0.0;1
+Brüttelen;0.0;1
+Brünisried;0.0;1
+Stetten (AG);0.0;1
+Steinen;0.0;1
+Grellingen;0.0;1
+Romont (BE);0.0;1
+Rumisberg;0.0;1
+Walkringen;0.0;1
+Pollegio;0.0;1
+Poliez-Pittet;0.0;1
+Bünzen;0.0;1
+Bühler;0.0;1
+Bözberg;0.0;1
+Rickenbach (TG);0.0;1
+Röthenbach im Emmental;0.0;1
+Rupperswil;0.0;1
+Reitnau;0.0;1
+Riaz;0.0;1
+Presinge;0.0;1
+Premier;0.0;1
+Raperswilen;0.0;1
+Ramlinsburg;0.0;1
+Courtelary;0.0;1
+Cugy (VD);0.0;1
+Vufflens-le-Château;0.0;1
+Vucherens;0.0;1
+Vuarrens;0.0;1
+Vuadens;0.0;1
+Rüdlingen;0.0;1
+Lütschental;0.0;1
+Mathod;0.0;1
+Lohn-Ammannsegg;0.0;1
+Linescio;0.0;1
+Lignières;0.0;1
+Lauwil;0.0;1
+Lauerz;0.0;1
+Lauenen;0.0;1
+Basse-Allaine;0.0;1
+Cuarnens;0.0;1
+Cressier (FR);0.0;1
+Rütschelen;0.0;1
+Bargen (BE);0.0;1
+Vuiteboeuf;0.0;1
+Vugelles-La Mothe;0.0;1
+Felben-Wellhausen;0.0;1
+Dietwil;0.0;1
+Les Verrières;0.0;1
+Les Enfers;0.0;1
+Les Clées;0.0;1
+Lengwil;0.0;1
+Wald (BE);0.0;1
+Wattenwil;0.0;1
+Reconvilier;0.0;1
+Walterswil (SO);0.0;1
+Graben;0.0;1
+Volken;0.0;1
+Wahlen;0.0;1
+Wachseldorn;0.0;1
+Rickenbach (SO);0.0;1
+Rodersdorf;0.0;1
+Rivaz;0.0;1
+Riniken;0.0;1
+Ringgenberg (BE);0.0;1
+Rifferswil;0.0;1
+Gottlieben;0.0;1
+Gontenschwil;0.0;1
+Rain;0.0;1
+Wassen;0.0;1
+Freienstein-Teufen;0.0;1
+Giffers;0.0;1
+Bitsch;0.0;1
+Scheuren;0.0;1
+Schwadernau;0.0;1
+Schönholzerswilen;0.0;1
+Schöfflisdorf;0.0;1
+Seltisberg;0.0;1
+Schwarzhäusern;0.0;1
+Fideris;0.0;1
+Fey;0.0;1
+Ferrera;0.0;1
+Feldbrunnen-St. Niklaus;0.0;1
+Develier;0.0;1
+Giebenach;0.0;1
+Geltwil;0.0;1
+Dörflingen;0.0;1
+Langrickenbach;0.0;1
+Ederswiler;0.0;1
+Finsterhennen;0.0;1
+Flurlingen;0.0;1
+Schlierbach;0.0;1
+Schwellbrunn;0.0;1
+Wengi;0.0;1
+Boulens;0.0;1
+Bottenwil;0.0;1
+Bossonnens;0.0;1
+Seewen;0.0;1
+Fischbach;0.0;1
+Schlatt (ZH);0.0;1
+Schlatt (TG);0.0;1
+Bovernier;0.0;1
+Bournens;0.0;1
+Saint-Aubin (FR);0.0;1
+Saicourt;0.0;1
+Bolken;0.0;1
+Agiez;0.0;1
+Wynau;0.0;1
+Aeschi (SO);0.0;1
+Zuzwil (SG);0.0;1
+Frauenkappelen;0.0;1
+Altbüron;0.0;1
+Freienwil;0.0;1
+Wildberg;0.0;1
+Wiggiswil;0.0;1
+Affeltrangen;0.0;1
+Wimmis;0.0;1
+Willadingen;0.0;1
+Wiliberg;0.0;1
+Wiler bei Utzenstorf;0.0;1
+Wilen (TG);0.0;1
+Forst-Längenbühl;0.0;1
+Aeugst am Albis;0.0;1
+Wittnau;0.0;1
+Wittinsburg;0.0;1
 Witterswil;0.0;1
-Gipf-Oberfrick;0.0;1
-Gurtnellen;0.0;1
+Froideville;0.0;1
+Allmendingen;0.0;1
+Staufen;0.0;1
+Stadel;0.0;1
+Schafisheim;0.0;1
+Dättlikon;0.0;1
+Därstetten;0.0;1
+Dänikon;0.0;1
+Dägerlen;0.0;1
+Drei Höfe;0.0;1
+Dotzigen;0.0;1
+Veysonnaz;0.0;1
+Vendlincourt;0.0;1
+Kienberg;0.0;1
+Le Flon;0.0;1
+Kippel;0.0;1
+Le Bémont (JU);0.0;1
+Lavigny;0.0;1
+Daillens;0.0;1
+Céligny;0.0;1
+Lampenberg;0.0;1
+Grimisuat;0.0;1
+Greppen;0.0;1
+Greng;0.0;1
+Grône;0.0;1
+Grub (AR);0.0;1
+Gravesano;0.0;1
+Buchillon;0.0;1
+Kiesen;0.0;1
+S-chanf;0.0;1
+Le Châtelard;0.0;1
+Küblis;0.0;1
+Känerkinden;0.0;1
+La Chaux (Cossonay);0.0;1
+La Sonnaz;0.0;1
+La Roche;0.0;1
+La Rippe;0.0;1
+La Chaux-du-Milieu;0.0;1
+Savosa;0.0;1
+Schelten;0.0;1
+Valeyres-sous-Rances;0.0;1
+Vico Morcote;0.0;1
+Vich;0.0;1
+Valbroye;0.0;1
+Sonvilier;0.0;1
+Inwil;0.0;1
+Kallern;0.0;1
+Jussy;0.0;1
+Saxeten;0.0;1
+Sommeri;0.0;1
+Sisseln;0.0;1
+Birrwil;0.0;1
+Saint-Martin (VS);0.0;1
+Saint-Martin (FR);0.0;1
+Veltheim (AG);0.0;1
+Vaulruz;0.0;1
+Speicher;0.0;1
+Sorens;0.0;1
+Sorengo;0.0;1
+Isone;0.0;1
+Häfelfingen;0.0;1
+Mont-Tramelan;0.0;1
+Molondin;0.0;1
+Misery-Courtion;0.0;1
+Cologny;0.0;1
+Morbio Inferiore;0.0;1
+Habsburg;0.0;1
+Gächlingen;0.0;1
+Gurzelen;0.0;1
+Hallwil;0.0;1
+Hubersdorf;0.0;1
+Horriwil;0.0;1
+Horrenbach-Buchen;0.0;1
+Mauborget;0.0;1
+Beinwil (SO);0.0;1
+Beinwil (Freiamt);0.0;1
+Bedano;0.0;1
+Heimenhausen;0.0;1
+Hefenhofen;0.0;1
+Montpreveyres;0.0;1
+Montilliez;0.0;1
+Hagneck;0.0;1
+Maisprach;0.0;1
+Belmont-sur-Lausanne;0.0;1
+Bellikon;0.0;1
+Berken;0.0;1
+Bergdietikon;0.0;1
+Mühlau;0.0;1
+Höri;0.0;1
+Ependes (VD);0.0;1
+Endingen;0.0;1
+Ins;0.0;1
+Untereggen;0.0;1
+Champoz;0.0;1
+Mirchel;0.0;1
+Movelier;0.0;1
+Ménières;0.0;1
+Innerthal;0.0;1
+Erlen;0.0;1
+Hirschthal;0.0;1
+Hildisrieden;0.0;1
+Nenzlingen;0.0;1
+Härkingen;0.0;1
+Bennwil;0.0;1
+Menznau;0.0;1
+Chavannes-le-Chêne;0.0;1
+Chardonne;0.0;1
+Chancy;0.0;1
+Cartigny;0.0;1
+Nebikon;0.0;1
+Neyruz (FR);0.0;1
+Neuheim;0.0;1
+Mont-sur-Rolle;0.0;1
+Mönthal;0.0;1
+Mézières (FR);0.0;1
+Münchenwiler;0.0;1
+Häutligen;0.0;1
+Neftenbach;0.0;1
+Ufhusen;0.0;1
+Chippis;0.0;1
+Chessel;0.0;1
+Chénens;0.0;1
+Andwil (SG);0.0;1
 Amsoldingen;0.0;1
-Zell (LU);0.0;1
-Yens;0.0;1
+Ammerswil;0.0;1
+Arnex-sur-Orbe;0.0;1
+Arbaz;0.0;1
+Anwil;0.0;1
+Wichtrach;0.0;1
+Attalens;0.0;1
+Arzier-Le Muids;0.0;1
+Treycovagnes;0.0;1
+Bettwiesen;0.0;1
+Bodensee (TG);0.0;1
+Allaman;0.0;1
+Hittnau;0.0;1
+Seegräben;0.0;1
+Givrins;0.0;1
+Gipf-Oberfrick;0.0;1
+Gingins;0.0;1
+Gilly;0.0;1
+Billens-Hennens;0.0;1
+Biezwil;0.0;1
+Schupfart;0.0;1
+Schmitten (FR);0.0;1
+Schmiedrued;0.0;1
 Altendorf;0.0;1
+Trey;0.0;1
+Wenslingen;0.0;1
+Bettenhausen;0.0;1
+Bioley-Magnoux;0.0;1
+Bioggio;0.0;1
+Semsales;0.0;1
+Sils im Domleschg;0.0;1
+Worben;0.0;1
+Aegerten;0.0;1
+Jorat-Menthue;0.0;1
+Jonschwil;0.0;1
+Jens;0.0;1
+Kehrsatz;0.0;1
+Tschugg;0.0;1
+Yens;0.0;1
+Wölflinswil;0.0;1
+Bettwil;0.0;1
+Châtonnaye;0.0;1
+Châtel-sur-Montsalvens;0.0;1
+Choulex;0.0;1
+Trélex;0.0;1
+Meyriez;0.0;1
+Zizers;0.0;1
+Zihlschlacht-Sitterdorf;0.0;1
+Zell (LU);0.0;1
+Gals;0.0;1
+Trun;0.0;1
+Troinex;0.0;1
+Kappel (SO);0.0;1
+Thierachern;0.0;1
+Treiten;0.0;1
+Oppligen;0.0;1
+Onnens (VD);0.0;1
+Ossingen;0.0;1
+Orpund;0.0;1
+Oltingen;0.0;1
+Olsberg;0.0;1
+Ochlenberg;0.0;1
+Buseno;0.0;1
+Bursins;0.0;1
+Rechthalten;0.0;1
+Recherswil;0.0;1
+Eppenberg-Wöschnau;0.0;1
+Petit-Val;0.0;1
+Personico;0.0;1
+Perly-Certoux;0.0;1
+Lignerolle;0.0;1
+Liedertswil;0.0;1
+Liddes;0.0;1
+Luins;0.0;1
+Leibstadt;0.0;1
+Dinhard;0.0;1
+Pohlern;0.0;1
+Plasselb;0.0;1
+Lussery-Villars;0.0;1
+Lumino;0.0;1
+Lully (FR);0.0;1
+Pfaffnau;0.0;1
+Marsens;0.0;1
+Meienried;0.0;1
+Mauensee;0.0;1
+Schlossrued;0.0;1
+Hersberg;0.0;1
+Homberg;0.0;1
+Hochwald;0.0;1
+Tenniken;0.0;1
+Tecknau;0.0;1
+Thundorf;0.0;1
+Bursinel;0.0;1
+Burgistein;0.0;1
+Buckten;0.0;1
+Oberthal;0.0;1
+Penthaz;0.0;1
+Gondiswil;0.0;1
+Renan (BE);0.0;1
+Riemenstalden;0.0;1
+Ried bei Kerzers;0.0;1
+Buttwil;0.0;1
+Buttisholz;0.0;1
+Sâles;0.0;1
+Termen;0.0;1
+Orges;0.0;1
+Titterten;0.0;1
+Thurnen;0.0;1
+Oberwil-Lieli;0.0;1
+Oberweningen;0.0;1
+Buus;0.0;1
+Niederbüren;0.0;1
+Cademario;0.0;1
+Büttenhardt;0.0;1
+Büron;0.0;1
+Castaneda;0.0;1
+Niederönz;0.0;1
+Niederried bei Interlaken;0.0;1
+Niedermuhlern;0.0;1
+Oberburg;0.0;1
+Oberbalm;0.0;1
+Campo (Vallemaggia);0.0;1
+Oberrüti;0.0;1
+Cerentino;0.0;1
+Corcelles (BE);0.0;1
+Cadempino;0.0;1
+Oberhof;0.0;1
+Oberengstringen;0.0;1
+Bavois;0.0;1
+Treyvaux;0.0;1
+Meltingen;0.0;1
+Meinisberg;0.0;1
+Maschwanden;0.0;1
+Herbligen;0.0;1
+Hellsau;0.0;1
+Eschert;0.0;1
+Oberlangenegg;0.0;1
+Egolzwil;0.0;1
+Eptingen;0.0;1
+Oberhünigen;0.0;1
+Concise;0.0;1
+Courgenay;0.0;1
+Matzendorf;0.0;1
+Mattstetten;0.0;1
+Hüttlingen;0.0;1
+Hüttikon;0.0;1
+Ueberstorf;0.0;1
+Tübach;0.0;1
+Tévenon;0.0;1
+Unterramsern;0.0;1
+Unterlangenegg;0.0;1
+Evionnaz;0.0;1
+Gurtnellen;0.0;1
+Niederdorf;0.0;1
+Etziken;0.0;1
+Ettingen;0.0;1
+Herdern;0.0;1
+Madulain;0.0;1
+Trasadingen;0.0;1
+Tramelan;0.0;1
+Toffen;0.0;1
+Tobel-Tägerschen;0.0;1
+Essertines-sur-Yverdon;0.0;1
+Faoug;0.0;1
+Fahy;0.0;1
+Eysins;0.0;1
+Niederhelfenschwil;0.0;1
+Niederglatt;0.0;1
+Erschwil;0.0;1
 Flawil;-0.0;1
 Domat/Ems;-0.0;1
 Flüelen;-0.0;1
@@ -1131,8 +1508,8 @@ Thal;-0.0;1
 Rüegsau;-0.0;1
 Vaulion;-0.0;1
 Flums;-0.0;1
-Villeret;-0.0;1
 Merishausen;-0.0;1
+Villeret;-0.0;1
 Fislisbach;-0.0;1
 Oberrohrdorf;-0.0;1
 La Sarraz;-0.0;1
@@ -1157,17 +1534,17 @@ Adliswil;-0.0;1
 Eggiwil;-0.0;1
 Denges;-0.0;1
 Wagenhausen;-0.0;1
-Rafz;-0.0;1
-Lüscherz;-0.0;1
-Mettauertal;-0.0;1
-Muhen;-0.0;1
-Meikirch;-0.0;1
 Trin;-0.0;1
+Meikirch;-0.0;1
+Muhen;-0.0;1
+Mettauertal;-0.0;1
+Lüscherz;-0.0;1
+Rafz;-0.0;1
 Muotathal;-0.0;1
 Eggersriet;-0.0;1
 Stans;-0.0;1
-Weisslingen;-0.0;1
 Nottwil;-0.0;1
+Weisslingen;-0.0;1
 Binn;-0.0;1
 Büsingen am Hochrhein;-0.0;1
 Egnach;-0.0;1
@@ -1176,13 +1553,13 @@ Nods;-0.0;1
 Blonay - Saint-Légier;-0.0;1
 Cevio;-0.0;1
 Hauenstein-Ifenthal;-0.0;1
-Holderbank (SO);-0.0;1
-Henggart;-0.0;1
 Arisdorf;-0.0;1
+Henggart;-0.0;1
 Chéserex;-0.0;1
-Schönenbuch;-0.0;1
 Rüderswil;-0.0;1
+Holderbank (SO);-0.0;1
 Büsserach;-0.0;1
+Schönenbuch;-0.0;1
 Noville;-0.0;1
 Windisch;-0.0;1
 Diepoldsau;-0.0;1
@@ -1216,12 +1593,12 @@ Grüsch;-1.0;1
 Mönchaltorf;-1.0;1
 Schänis;-1.0;1
 Château-d'Oex;-1.0;1
-Werthenstein;-1.0;1
 Icogne;-1.0;1
-Melchnau;-1.0;1
 Müntschemier;-1.0;1
-Büttikon;-1.0;1
 Muntelier;-1.0;1
+Büttikon;-1.0;1
+Melchnau;-1.0;1
+Werthenstein;-1.0;1
 Haut-Intyamon;-1.0;1
 Oberried am Brienzersee;-1.0;1
 Möhlin;-1.0;1
@@ -1236,12 +1613,12 @@ Courtepin;-1.0;1
 Kölliken;-1.0;1
 Schattenhalb;-1.0;1
 Uetendorf;-1.0;1
-Bardonnex;-1.0;1
-Täuffelen;-1.0;1
-Genthod;-1.0;1
 Buchrain;-1.0;1
-Häggenschwil;-1.0;1
+Genthod;-1.0;1
 Geuensee;-1.0;1
+Häggenschwil;-1.0;1
+Täuffelen;-1.0;1
+Bardonnex;-1.0;1
 Sarmenstorf;-1.0;1
 Wisen (SO);-1.0;1
 Gsteigwiler;-1.0;1
@@ -1282,26 +1659,26 @@ Künten;-3.0;1
 Les Montets;-3.0;1
 Reute (AR);-3.0;1
 Pfeffingen;-3.0;1
-Bercher;-3.0;1
 Villorsonnens;-3.0;1
 Kappel am Albis;-3.0;1
+Bercher;-3.0;1
 Otelfingen;-3.0;1
-Grosshöchstetten;-3.0;1
 Hasle bei Burgdorf;-3.0;1
+Grosshöchstetten;-3.0;1
 Ried-Brig;-3.0;1
 Lavizzara;-3.0;1
 Koblenz;-3.0;1
-Pomy;-3.0;1
-Bois-d'Amont;-3.0;1
 Mergoscia;-3.0;1
-Truttikon;-3.0;1
-Avry;-3.0;1
+Pomy;-3.0;1
 Biglen;-3.0;1
+Bois-d'Amont;-3.0;1
+Avry;-3.0;1
+Truttikon;-3.0;1
 Kaiseraugst;-3.0;1
 Cheyres-Châbles;-3.0;1
 Wigoltingen;-3.0;1
-Diegten;-3.0;1
 Wohlenschwil;-3.0;1
+Diegten;-3.0;1
 Neerach;-3.0;1
 Hendschiken;-4.0;1
 Ehrendingen;-4.0;1
@@ -1331,22 +1708,22 @@ Diessbach bei Büren;-5.0;1
 Kerns;-5.0;1
 Arni (AG);-6.0;1
 Mörschwil;-6.0;1
-Radelfingen;-6.0;1
-Bettingen;-6.0;1
 Le Pâquier (FR);-6.0;1
-Heiligenschwendi;-6.0;1
+Bettingen;-6.0;1
 Brusio;-6.0;1
+Heiligenschwendi;-6.0;1
+Radelfingen;-6.0;1
 Yvorne;-6.0;1
 Seedorf (UR);-6.0;1
-Zäziwil;-6.0;1
 Leutwil;-6.0;1
+Zäziwil;-6.0;1
 Isenthal;-6.0;1
 Niederweningen;-6.0;1
 Bever;-6.0;1
-Bäriswil;-6.0;1
-Kernenried;-6.0;1
 Cortébert;-6.0;1
+Kernenried;-6.0;1
 Ursy;-6.0;1
+Bäriswil;-6.0;1
 Niederrohrdorf;-7.0;1
 Niedergesteln;-7.0;1
 Törbel;-7.0;1
@@ -1365,382 +1742,5 @@ Wolfenschiessen;-11.0;1
 Felsberg;-13.0;1
 Oberwil bei Büren;-15.0;1
 Rüeggisberg;-15.0;1
-Rickenbach (LU);-18.0;1
 Mezzovico-Vira;-18.0;1
-Aeschi (SO);0.0;1
-Aeugst am Albis;0.0;1
-Affeltrangen;0.0;1
-Agiez;0.0;1
-Allaman;0.0;1
-Allmendingen;0.0;1
-Altbüron;0.0;1
-Ammerswil;0.0;1
-Andwil (SG);0.0;1
-Anwil;0.0;1
-Arbaz;0.0;1
-Arnex-sur-Orbe;0.0;1
-Arzier-Le Muids;0.0;1
-Attalens;0.0;1
-Ausserberg;0.0;1
-Avully;0.0;1
-Ballaigues;0.0;1
-Bannwil;0.0;1
-Bargen (BE);0.0;1
-Basse-Allaine;0.0;1
-Bavois;0.0;1
-Bedano;0.0;1
-Beinwil (Freiamt);0.0;1
-Belmont-sur-Lausanne;0.0;1
-Bennwil;0.0;1
-Bergdietikon;0.0;1
-Berken;0.0;1
-Bettenhausen;0.0;1
-Bettwiesen;0.0;1
-Bettwil;0.0;1
-Biezwil;0.0;1
-Billens-Hennens;0.0;1
-Bioley-Magnoux;0.0;1
-Bodensee (TG);0.0;1
-Bossonnens;0.0;1
-Bottenwil;0.0;1
-Boulens;0.0;1
-Bovernier;0.0;1
-Breitenbach;0.0;1
-Bretigny-sur-Morrens;0.0;1
-Bretonnières;0.0;1
-Bretzwil;0.0;1
-Brittnau;0.0;1
-Brünisried;0.0;1
-Brüttelen;0.0;1
-Brütten;0.0;1
-Buch am Irchel;0.0;1
-Buchberg;0.0;1
-Buchholterberg;0.0;1
-Buchillon;0.0;1
-Buckten;0.0;1
-Burgistein;0.0;1
-Bursinel;0.0;1
-Bursins;0.0;1
-Buseno;0.0;1
-Buttisholz;0.0;1
-Buttwil;0.0;1
-Buus;0.0;1
-Bözberg;0.0;1
-Bühler;0.0;1
-Bünzen;0.0;1
-Büron;0.0;1
-Büttenhardt;0.0;1
-Cademario;0.0;1
-Cadempino;0.0;1
-Campo (Vallemaggia);0.0;1
-Champoz;0.0;1
-Chancy;0.0;1
-Chardonne;0.0;1
-Chavannes-le-Chêne;0.0;1
-Chessel;0.0;1
-Chippis;0.0;1
-Choulex;0.0;1
-Châtel-sur-Montsalvens;0.0;1
-Châtonnaye;0.0;1
-Cologny;0.0;1
-Concise;0.0;1
-Corcelles (BE);0.0;1
-Corsier (GE);0.0;1
-Corsier-sur-Vevey;0.0;1
-Cottens (FR);0.0;1
-Courgenay;0.0;1
-Cressier (FR);0.0;1
-Cuarnens;0.0;1
-Cuarny;0.0;1
-Cugy (VD);0.0;1
-Céligny;0.0;1
-Daillens;0.0;1
-Dietwil;0.0;1
-Donneloye;0.0;1
-Doppleschwand;0.0;1
-Dottikon;0.0;1
-Dotzigen;0.0;1
-Dägerlen;0.0;1
-Dänikon;0.0;1
-Dättlikon;0.0;1
-Dörflingen;0.0;1
-Ederswiler;0.0;1
-Egolzwil;0.0;1
-Endingen;0.0;1
-Ependes (VD);0.0;1
-Eptingen;0.0;1
-Erlen;0.0;1
-Erschwil;0.0;1
-Eschert;0.0;1
-Ettingen;0.0;1
-Etziken;0.0;1
-Eysins;0.0;1
-Faoug;0.0;1
-Felben-Wellhausen;0.0;1
-Feldbrunnen-St. Niklaus;0.0;1
-Ferrera;0.0;1
-Fey;0.0;1
-Fideris;0.0;1
-Finsterhennen;0.0;1
-Flurlingen;0.0;1
-Forst-Längenbühl;0.0;1
-Frauenkappelen;0.0;1
-Freienstein-Teufen;0.0;1
-Freienwil;0.0;1
-Froideville;0.0;1
-Fräschels;0.0;1
-Full-Reuenthal;0.0;1
-Féchy;0.0;1
-Fétigny;0.0;1
-Gals;0.0;1
-Geltwil;0.0;1
-Giebenach;0.0;1
-Giffers;0.0;1
-Gilly;0.0;1
-Gingins;0.0;1
-Gondiswil;0.0;1
-Gontenschwil;0.0;1
-Gottlieben;0.0;1
-Graben;0.0;1
-Grandcour;0.0;1
-Gravesano;0.0;1
-Greppen;0.0;1
-Grimisuat;0.0;1
-Grolley-Ponthaux;0.0;1
-Grub (AR);0.0;1
-Grône;0.0;1
-Gurzelen;0.0;1
-Gächlingen;0.0;1
-Habsburg;0.0;1
-Hagneck;0.0;1
-Hallwil;0.0;1
-Hefenhofen;0.0;1
-Heimenhausen;0.0;1
-Hellsau;0.0;1
-Herbligen;0.0;1
-Herdern;0.0;1
-Hersberg;0.0;1
-Hildisrieden;0.0;1
-Hittnau;0.0;1
-Homberg;0.0;1
-Horrenbach-Buchen;0.0;1
-Horriwil;0.0;1
-Hubersdorf;0.0;1
-Häfelfingen;0.0;1
-Härkingen;0.0;1
-Häutligen;0.0;1
-Höri;0.0;1
-Hüttikon;0.0;1
-Hüttlingen;0.0;1
-Innerthal;0.0;1
-Ins;0.0;1
-Inwil;0.0;1
-Isone;0.0;1
-Jorat-Menthue;0.0;1
-Jussy;0.0;1
-Kallern;0.0;1
-Kappel (SO);0.0;1
-Kehrsatz;0.0;1
-Kienberg;0.0;1
-Känerkinden;0.0;1
-La Chaux (Cossonay);0.0;1
-La Chaux-du-Milieu;0.0;1
-La Rippe;0.0;1
-La Roche;0.0;1
-La Sonnaz;0.0;1
-Lampenberg;0.0;1
-Landiswil;0.0;1
-Langrickenbach;0.0;1
-Lauenen;0.0;1
-Lauerz;0.0;1
-Lauwil;0.0;1
-Lavigny;0.0;1
-Le Bémont (JU);0.0;1
-Le Châtelard;0.0;1
-Le Flon;0.0;1
-Leibstadt;0.0;1
-Lengwil;0.0;1
-Les Clées;0.0;1
-Les Enfers;0.0;1
-Les Verrières;0.0;1
-Lignerolle;0.0;1
-Lignières;0.0;1
-Linescio;0.0;1
-Luins;0.0;1
-Lussery-Villars;0.0;1
-Lütschental;0.0;1
-Madulain;0.0;1
-Maisprach;0.0;1
-Marsens;0.0;1
-Maschwanden;0.0;1
-Mathod;0.0;1
-Mattstetten;0.0;1
-Matzendorf;0.0;1
-Mauensee;0.0;1
-Meienried;0.0;1
-Meltingen;0.0;1
-Meyriez;0.0;1
-Mirchel;0.0;1
-Misery-Courtion;0.0;1
-Molondin;0.0;1
-Mont-Tramelan;0.0;1
-Mont-sur-Rolle;0.0;1
-Montilliez;0.0;1
-Movelier;0.0;1
-Ménières;0.0;1
-Mézières (FR);0.0;1
-Mönthal;0.0;1
-Mühlau;0.0;1
-Münchenwiler;0.0;1
-Neftenbach;0.0;1
-Nenzlingen;0.0;1
-Neuheim;0.0;1
-Neyruz (FR);0.0;1
-Niederdorf;0.0;1
-Niederglatt;0.0;1
-Niederhelfenschwil;0.0;1
-Niedermuhlern;0.0;1
-Niederried bei Interlaken;0.0;1
-Niederönz;0.0;1
-Oberbalm;0.0;1
-Oberburg;0.0;1
-Oberhof;0.0;1
-Oberhünigen;0.0;1
-Oberrüti;0.0;1
-Oberthal;0.0;1
-Oberweningen;0.0;1
-Oberwil-Lieli;0.0;1
-Ochlenberg;0.0;1
-Olsberg;0.0;1
-Onnens (VD);0.0;1
-Oppligen;0.0;1
-Orges;0.0;1
-Orpund;0.0;1
-Ossingen;0.0;1
-Penthaz;0.0;1
-Perly-Certoux;0.0;1
-Personico;0.0;1
-Petit-Val;0.0;1
-Pfaffnau;0.0;1
-Plasselb;0.0;1
-Poliez-Pittet;0.0;1
-Pollegio;0.0;1
-Premier;0.0;1
-Ramlinsburg;0.0;1
-Raperswilen;0.0;1
-Rechthalten;0.0;1
-Reconvilier;0.0;1
-Reitnau;0.0;1
-Riaz;0.0;1
-Rickenbach (SO);0.0;1
-Rickenbach (TG);0.0;1
-Ried bei Kerzers;0.0;1
-Riemenstalden;0.0;1
-Rifferswil;0.0;1
-Ringgenberg (BE);0.0;1
-Riniken;0.0;1
-Rivaz;0.0;1
-Rodersdorf;0.0;1
-Roggliswil;0.0;1
-Romont (BE);0.0;1
-Rongellen;0.0;1
-Rothenbrunnen;0.0;1
-Rupperswil;0.0;1
-Röthenbach im Emmental;0.0;1
-Rüdlingen;0.0;1
-Rütschelen;0.0;1
-S-chanf;0.0;1
-Saicourt;0.0;1
-Saint-Aubin (FR);0.0;1
-Saint-Martin (FR);0.0;1
-Saint-Martin (VS);0.0;1
-Saint-Oyens;0.0;1
-Saxeten;0.0;1
-Schafisheim;0.0;1
-Schelten;0.0;1
-Scheuren;0.0;1
-Schlatt (TG);0.0;1
-Schlierbach;0.0;1
-Schlossrued;0.0;1
-Schmiedrued;0.0;1
-Schupfart;0.0;1
-Schwadernau;0.0;1
-Schwarzhäusern;0.0;1
-Schöfflisdorf;0.0;1
-Schönholzerswilen;0.0;1
-Seegräben;0.0;1
-Seewen;0.0;1
-Seltisberg;0.0;1
-Semsales;0.0;1
-Sils im Domleschg;0.0;1
-Sisseln;0.0;1
-Sommeri;0.0;1
-Sonvilier;0.0;1
-Sorengo;0.0;1
-Sorens;0.0;1
-Speicher;0.0;1
-Staufen;0.0;1
-Steinen;0.0;1
-Stetten (AG);0.0;1
-Sâles;0.0;1
-Tecknau;0.0;1
-Tenniken;0.0;1
-Termen;0.0;1
-Thundorf;0.0;1
-Thurnen;0.0;1
-Titterten;0.0;1
-Tobel-Tägerschen;0.0;1
-Toffen;0.0;1
-Tramelan;0.0;1
-Trasadingen;0.0;1
-Treiten;0.0;1
-Trey;0.0;1
-Treyvaux;0.0;1
-Troinex;0.0;1
-Trélex;0.0;1
-Tévenon;0.0;1
-Tübach;0.0;1
-Ueberstorf;0.0;1
-Ufhusen;0.0;1
-Untereggen;0.0;1
-Unterlangenegg;0.0;1
-Unterramsern;0.0;1
-Valbroye;0.0;1
-Valeyres-sous-Rances;0.0;1
-Vendlincourt;0.0;1
-Veysonnaz;0.0;1
-Vich;0.0;1
-Vico Morcote;0.0;1
-Villars-Sainte-Croix;0.0;1
-Villars-sous-Yens;0.0;1
-Villnachern;0.0;1
-Vinzel;0.0;1
-Volken;0.0;1
-Vuadens;0.0;1
-Vuarrens;0.0;1
-Vucherens;0.0;1
-Vufflens-le-Château;0.0;1
-Vugelles-La Mothe;0.0;1
-Vuiteboeuf;0.0;1
-Wachseldorn;0.0;1
-Wahlen;0.0;1
-Wald (BE);0.0;1
-Walkringen;0.0;1
-Walliswil bei Niederbipp;0.0;1
-Walterswil (SO);0.0;1
-Wassen;0.0;1
-Wengi;0.0;1
-Wenslingen;0.0;1
-Wiggiswil;0.0;1
-Wilen (TG);0.0;1
-Wiler bei Utzenstorf;0.0;1
-Wiliberg;0.0;1
-Wimmis;0.0;1
-Wittinsburg;0.0;1
-Wittnau;0.0;1
-Worben;0.0;1
-Wynau;0.0;1
-Wölflinswil;0.0;1
-Zihlschlacht-Sitterdorf;0.0;1
-Zizers;0.0;1
-Zuzwil (SG);0.0;1
+Rickenbach (LU);-18.0;1

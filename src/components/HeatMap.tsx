@@ -52,30 +52,46 @@ function CommunePolygons({
   useEffect(() => {
     if (!geoJsonData || !communes.length) return;
 
-    const getColor = (score: number) => {
-      const s = Math.max(0, Math.min(100, score)) / 100;
+    const getColor = (
+    score: number | null | undefined,
+    minScore: number = -50,
+    maxScore: number = 100 ) => {
+      if (score == null) return 'rgb(0, 0, 0)'; // noir pour score manquant
+
+      // Clamp le score dans la plage min/max
+      const clamped = Math.max(minScore, Math.min(maxScore, score));
+
+      // Normalisation entre 0 et 1
+      const s = (clamped - minScore) / (maxScore - minScore);
+
       const stops = [
-        { stop: 0.0, color: [0, 0, 255] },
-        { stop: 0.33, color: [0, 255, 0] },
-        { stop: 0.66, color: [255, 255, 0] },
-        { stop: 1.0, color: [255, 0, 0] },
+        { stop: 0.0, color: [0, 0, 255] },    // bleu = plus bas
+        { stop: 0.25, color: [0, 255, 255] }, // cyan
+        { stop: 0.5, color: [0, 255, 0] },    // vert = 0 ou milieu
+        { stop: 0.75, color: [255, 255, 0] }, // jaune
+        { stop: 1.0, color: [255, 0, 0] }     // rouge = plus haut
       ];
+
       let i = 0;
       while (i < stops.length - 1 && s > stops[i + 1].stop) i++;
+
       const t = (s - stops[i].stop) / (stops[i + 1].stop - stops[i].stop);
       const r = Math.round(stops[i].color[0] + t * (stops[i + 1].color[0] - stops[i].color[0]));
       const g = Math.round(stops[i].color[1] + t * (stops[i + 1].color[1] - stops[i].color[1]));
       const b = Math.round(stops[i].color[2] + t * (stops[i + 1].color[2] - stops[i].color[2]));
+
       return `rgb(${r}, ${g}, ${b})`;
-    };
+  };
 
     const geoJsonLayer = L.geoJSON(geoJsonData, {
       style: (feature: any) => {
         const name = feature.properties.NAME?.trim().toLowerCase();
         const communeMatch = communesByName[name];
         const score = communeMatch ? communeMatch.score : 0;
+        const min = Math.min(...communes.map(c => c.score));
+        const max = Math.max(...communes.map(c => c.score));
         return {
-          fillColor: getColor(score),
+          fillColor: getColor(score, min, max),
           weight: 1,
           color: 'black',
           opacity: 0.7,
