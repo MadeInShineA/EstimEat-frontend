@@ -1,11 +1,13 @@
 import { Commune } from "../lib/supabase";
+import { getCantonName } from "./helper";
 
 interface TopCommunesProps {
   communes: Commune[];
   topN?: number;
+  communesByName: Record<string, any>;
 }
 
-export function TopCommunes({ communes, topN = 5 }: TopCommunesProps) {
+export function TopCommunes({ communes, topN = 5,communesByName }: TopCommunesProps) {
   // Trier les communes par score décroissant
   const sorted = [...communes].sort((a, b) => b.score - a.score).slice(0, topN);
 
@@ -15,7 +17,7 @@ export function TopCommunes({ communes, topN = 5 }: TopCommunesProps) {
       <ol className="list-decimal list-inside space-y-1">
         {sorted.map((c, idx) => (
           <li key={c.id}>
-            <span className="font-medium">{c.name}</span> ({c.canton}) -{" "}
+            <span className="font-medium">{c.name}</span> ({getCantonName(communesByName[c.name.trim().toLowerCase()]?.geo.properties.KANTONSNUM)}) -{" "}
             <span className="text-emerald-600 font-semibold">{c.score.toFixed(1)}</span>
           </li>
         ))}

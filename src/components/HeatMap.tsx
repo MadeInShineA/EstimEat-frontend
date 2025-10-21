@@ -3,42 +3,62 @@ import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Commune } from '../lib/supabase';
+import { getCantonName } from './helper';
 
 interface HeatMapProps {
   communes: Commune[];
   selectedCommune: Commune | null;
   geoJsonData: any;
+  communesByName: Record<string, any>;
 }
 
-function MapController({ selectedCommune }: { selectedCommune: Commune | null }) {
+function MapController({
+  selectedCommune,
+  geoJsonData,
+  communesByName,
+}: {
+  selectedCommune: Commune | null;
+  geoJsonData: any;
+  communesByName: Record<string, any>;
+}) {
   const map = useMap();
 
   useEffect(() => {
-    if (selectedCommune) {
-      map.setView([selectedCommune.lat, selectedCommune.long], 12, {
-        animate: true,
-        duration: 1
-      });
-    }
-  }, [selectedCommune, map]);
+    if (!selectedCommune) return;
+    const communeGeo = communesByName[selectedCommune.name.trim().toLowerCase()]?.geo;
+    if (!communeGeo) return;
+
+    const tempLayer = L.geoJSON(communeGeo);
+    const bounds = tempLayer.getBounds();
+    const center = bounds.getCenter();
+
+    map.setView([center.lat, center.lng], 12, { animate: true, duration: 1 });
+  }, [selectedCommune, communesByName, map]);
 
   return null;
 }
 
-function CommunePolygons({ geoJsonData, communes }: { geoJsonData: any; communes: Commune[] }) {
+function CommunePolygons({
+  geoJsonData,
+  communes,
+  communesByName,
+}: {
+  geoJsonData: any;
+  communes: Commune[];
+  communesByName: Record<string, any>;
+}) {
   const map = useMap();
 
   useEffect(() => {
     if (!geoJsonData || !communes.length) return;
 
-    // Dégradé continu
     const getColor = (score: number) => {
       const s = Math.max(0, Math.min(100, score)) / 100;
       const stops = [
-        { stop: 0.0, color: [0, 0, 255] },    // bleu
-        { stop: 0.33, color: [0, 255, 0] },   // vert
-        { stop: 0.66, color: [255, 255, 0] }, // jaune
-        { stop: 1.0, color: [255, 0, 0] }     // rouge
+        { stop: 0.0, color: [0, 0, 255] },
+        { stop: 0.33, color: [0, 255, 0] },
+        { stop: 0.66, color: [255, 255, 0] },
+        { stop: 1.0, color: [255, 0, 0] },
       ];
       let i = 0;
       while (i < stops.length - 1 && s > stops[i + 1].stop) i++;
@@ -52,31 +72,32 @@ function CommunePolygons({ geoJsonData, communes }: { geoJsonData: any; communes
     const geoJsonLayer = L.geoJSON(geoJsonData, {
       style: (feature: any) => {
         const name = feature.properties.NAME?.trim().toLowerCase();
-        const communeMatch = communes.find(c => c.name.trim().toLowerCase() === name);
+        const communeMatch = communesByName[name];
         const score = communeMatch ? communeMatch.score : 0;
         return {
           fillColor: getColor(score),
           weight: 1,
-          opacity: 1,
-          color: 'white',
-          fillOpacity: 0.6
+          color: 'black',
+          opacity: 0.7,
+          fillOpacity: 0.6,
         };
       },
       onEachFeature: (feature, layer) => {
         const name = feature.properties.NAME?.trim().toLowerCase();
-        const communeMatch = communes.find(c => c.name.trim().toLowerCase() === name);
+        const communeMatch = communesByName[name];
+        console.log(communeMatch);
 
         if (communeMatch) {
           const featuresList = communeMatch.features?.length
             ? `<ul style="margin: 5px 0 0 0; padding-left: 20px;">
-                ${communeMatch.features.map(f => `<li>${f}</li>`).join("")}
+                ${communeMatch.features.map((f:any) => `<li>${f}</li>`).join('')}
               </ul>`
             : "<p style='margin: 5px 0;'>Aucune caractéristique disponible.</p>";
 
           layer.bindPopup(`
             <div style="font-family: sans-serif;">
               <h3 style="margin: 0 0 10px 0;">${communeMatch.name}</h3>
-              <p style="margin: 5px 0;"><strong>Canton:</strong> ${communeMatch.canton}</p>
+              <p style="margin: 5px 0;"><strong>Canton:</strong> ${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</p>
               <p style="margin: 5px 0;"><strong>Score:</strong> ${communeMatch.score.toFixed(1)}</p>
               <h4 style="margin: 10px 0 5px 0;">Caractéristiques :</h4>
               ${featuresList}
@@ -86,33 +107,35 @@ function CommunePolygons({ geoJsonData, communes }: { geoJsonData: any; communes
 
         layer.on({
           mouseover: (e) => {
-            const target = e.target;
-            target.setStyle({ weight: 3, fillOpacity: 0.8 });
-            target.openPopup();
+            e.target.setStyle({ weight: 3, fillOpacity: 0.8 });
+            e.target.openPopup();
           },
           mouseout: (e) => {
             geoJsonLayer.resetStyle(e.target);
             e.target.closePopup();
-          }
+          },
         });
-      }
+      },
     }).addTo(map);
 
-    return () => {
-      map.removeLayer(geoJsonLayer);
-    };
-  }, [geoJsonData, communes, map]);
+    return () => {map.removeLayer(geoJsonLayer)};
+  }, [geoJsonData, communesByName, map]);
 
   return null;
 }
 
-export function HeatMap({ communes, selectedCommune, geoJsonData }: HeatMapProps) {
+export function HeatMap({
+  communes,
+  selectedCommune,
+  geoJsonData,
+  communesByName,
+}: HeatMapProps) {
   return (
     <MapContainer
-      center={[46.8, 8.2275]} 
+      center={[46.8, 8.2275]}
       zoom={8}
       style={{ height: '100vh', width: '100%' }}
-      maxBounds={[[45.5, 5.5], [47.9, 10.7]]} // Limite à la Suisse
+      maxBounds={[[45.5, 5.5], [47.9, 10.7]]}
       maxBoundsViscosity={1.0}
       minZoom={7}
       maxZoom={12}
@@ -123,10 +146,18 @@ export function HeatMap({ communes, selectedCommune, geoJsonData }: HeatMapProps
       />
 
       {geoJsonData && communes.length > 0 && (
-        <CommunePolygons geoJsonData={geoJsonData} communes={communes} />
+        <CommunePolygons
+          geoJsonData={geoJsonData}
+          communes={communes}
+          communesByName={communesByName}
+        />
       )}
 
-      <MapController selectedCommune={selectedCommune} />
+      <MapController
+        selectedCommune={selectedCommune}
+        geoJsonData={geoJsonData}
+        communesByName={communesByName}
+      />
     </MapContainer>
   );
 }

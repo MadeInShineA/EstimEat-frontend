@@ -9,22 +9,35 @@ import { AlertCircle, Loader2 } from 'lucide-react';
 import { TopCommunes } from './components/TopCommunes';
 
 function App() {
-  console.log()
-  const { communes, loading, error } = useCommunes();
+  const { communes: rawCommunes, loading, error } = useCommunes();
   const [selectedCommune, setSelectedCommune] = useState<Commune | null>(null);
-
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
+
+  // On stocke le GeoJSON de chaque commune dans un dictionnaire
+  const [communesByName, setCommunesByName] = useState<Record<string, any>>({});
 
   useEffect(() => {
     fetch('/data/communes.geojson')
       .then(res => {
-        console.log("test")
         if (!res.ok) throw new Error('GeoJSON non trouvé');
         return res.json();
       })
-      .then(data => setGeoJsonData(data))
+      .then(data => {
+        setGeoJsonData(data);
+
+        // Lier le GeoJSON à chaque commune par nom
+        const dict: Record<string, any> = {};
+        rawCommunes.forEach(c => {
+          const feature = data.features.find(
+            (f: any) =>
+              f.properties.NAME?.trim().toLowerCase() === c.name.trim().toLowerCase()
+          );
+          dict[c.name.trim().toLowerCase()] = { ...c, geo: feature };
+        });
+        setCommunesByName(dict);
+      })
       .catch(err => console.error('Erreur lors du chargement du GeoJSON:', err));
-  }, []);
+  }, [rawCommunes]);
 
   if (loading) {
     return (
@@ -55,22 +68,27 @@ function App() {
 
       <div className="flex-1 flex flex-col max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 gap-4">
         <div className="w-full max-w-md">
-          <SearchBar communes={communes} onSelect={setSelectedCommune} />
+          <SearchBar rawCommunes={rawCommunes} communesByName={communesByName} onSelect={setSelectedCommune} />
         </div>
 
         <div className="flex-1 relative min-h-[500px] lg:min-h-[600px]">
           <div className="absolute inset-0">
-            <HeatMap communes={communes} selectedCommune={selectedCommune} geoJsonData={geoJsonData} />
+            <HeatMap
+              communes={rawCommunes}
+              selectedCommune={selectedCommune}
+              geoJsonData={geoJsonData}
+              communesByName={communesByName}
+            />
           </div>
 
           <div className="absolute top-4 right-4 z-[1000] flex flex-col gap-2">
-            <TopCommunes communes={communes} topN={5} />
+            <TopCommunes communes={rawCommunes} communesByName={communesByName} topN={5} />
             <Legend />
-        </div>
+          </div>
         </div>
 
         <div className="text-center text-sm text-gray-500">
-          Showing {communes.length} communes across Switzerland
+          Showing {rawCommunes.length} communes across Switzerland
         </div>
       </div>
     </div>

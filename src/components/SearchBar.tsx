@@ -1,14 +1,16 @@
 import { Search } from 'lucide-react';
 import { Commune } from '../lib/supabase';
+import { getCantonName } from './helper';
 
 interface SearchBarProps {
-  communes: Commune[];
+  rawCommunes: Commune[];
+  communesByName: Record<string, any>;
   onSelect: (commune: Commune) => void;
 }
 
-export function SearchBar({ communes, onSelect }: SearchBarProps) {
+export function SearchBar({ rawCommunes,communesByName, onSelect }: SearchBarProps) {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = communes.find(c => c.id === parseInt(e.target.value));
+    const selected = rawCommunes.find(c => c.id === parseInt(e.target.value));
     if (selected) {
       onSelect(selected);
     }
@@ -27,9 +29,9 @@ export function SearchBar({ communes, onSelect }: SearchBarProps) {
         <option value="" disabled>
           Search for a commune...
         </option>
-        {communes.map((commune) => (
+        {rawCommunes.map((commune) => (
           <option key={commune.id} value={commune.id}>
-            {commune.name} ({commune.canton})
+            {commune.name} ({getCantonName(communesByName[commune.name.trim().toLowerCase()]?.geo.properties.KANTONSNUM)})
           </option>
         ))}
       </select>
