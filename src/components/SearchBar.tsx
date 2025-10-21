@@ -29,7 +29,7 @@ export function SearchBar({ communes, onSelect }: SearchBarProps) {
         </option>
         {communes.map((commune) => (
           <option key={commune.id} value={commune.id}>
-            {commune.nom} ({commune.canton})
+            {commune.name} ({commune.canton})
           </option>
         ))}
       </select>

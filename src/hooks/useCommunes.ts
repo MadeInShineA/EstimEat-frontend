@@ -11,9 +11,9 @@ export function useCommunes() {
       try {
         setLoading(true);
         const { data, error } = await supabase
-          .from('communes_growth')
+          .from('communes')
           .select('*')
-          .order('nom');
+          .order('name');
 
         if (error) throw error;
 

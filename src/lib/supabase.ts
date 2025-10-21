@@ -7,15 +7,19 @@ if (!supabaseUrl || !supabaseKey) {
   throw new Error('Missing Supabase environment variables');
 }
 
+
 export const supabase = createClient(supabaseUrl, supabaseKey);
+
 
 export interface Commune {
   id: number;
-  nom: string;
+  name: string;
   lat: number;
   long: number;
   canton: string;
   score: number;
   features: string[];
   extra_info: string;
+  version: number;
 }
+

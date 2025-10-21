@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { SearchBar } from './components/SearchBar';
 import { Legend } from './components/Legend';
@@ -10,6 +10,18 @@ import { AlertCircle, Loader2 } from 'lucide-react';
 function App() {
   const { communes, loading, error } = useCommunes();
   const [selectedCommune, setSelectedCommune] = useState<Commune | null>(null);
+
+  const [geoJsonData, setGeoJsonData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch('/data/communes.geojson') // <- chemin correct depuis public/
+      .then(res => {
+        if (!res.ok) throw new Error('GeoJSON non trouvé');
+        return res.json();
+      })
+      .then(data => setGeoJsonData(data))
+      .catch(err => console.error('Erreur lors du chargement du GeoJSON:', err));
+  }, []);
 
   if (loading) {
     return (
@@ -45,7 +57,7 @@ function App() {
 
         <div className="flex-1 relative min-h-[500px] lg:min-h-[600px]">
           <div className="absolute inset-0">
-            <HeatMap communes={communes} selectedCommune={selectedCommune} />
+            <HeatMap communes={communes} selectedCommune={selectedCommune} geoJsonData={geoJsonData} />
           </div>
 
           <div className="absolute bottom-4 right-4 z-[1000]">

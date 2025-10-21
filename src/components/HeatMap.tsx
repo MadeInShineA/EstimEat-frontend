@@ -1,78 +1,16 @@
-import { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Popup, useMap } from 'react-leaflet';
+import { useEffect } from 'react';
+import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import 'leaflet.heat';
 import { Commune } from '../lib/supabase';
-import { CommunePopup } from './CommunePopup';
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
+import { point } from '@turf/helpers';
+import type { Feature, Polygon, MultiPolygon } from 'geojson';
 
 interface HeatMapProps {
   communes: Commune[];
   selectedCommune: Commune | null;
-}
-
-function HeatLayer({ communes }: { communes: Commune[] }) {
-  const map = useMap();
-  const heatLayerRef = useRef<L.HeatLayer | null>(null);
-
-  useEffect(() => {
-    if (communes.length === 0) return;
-
-    if (heatLayerRef.current) {
-      map.removeLayer(heatLayerRef.current);
-    }
-
-    const maxScore = Math.max(...communes.map(c => c.score));
-    const heatData: [number, number, number][] = communes.map(commune => [
-      commune.lat,
-      commune.long,
-      commune.score / maxScore
-    ]);
-
-    heatLayerRef.current = (L as any).heatLayer(heatData, {
-      radius: 25,
-      blur: 15,
-      maxZoom: 17,
-      max: 1.0,
-      gradient: {
-        0.0: 'blue',
-        0.4: 'lime',
-        0.7: 'yellow',
-        1.0: 'red'
-      }
-    }).addTo(map);
-
-    return () => {
-      if (heatLayerRef.current) {
-        map.removeLayer(heatLayerRef.current);
-      }
-    };
-  }, [communes, map]);
-
-  return null;
-}
-
-function CommuneMarkers({ communes }: { communes: Commune[] }) {
-  return (
-    <>
-      {communes.map((commune) => {
-        const icon = L.divIcon({
-          className: 'custom-marker',
-          html: '<div style="width: 10px; height: 10px; background: transparent; border: 2px solid rgba(0,0,0,0.3); border-radius: 50%;"></div>',
-          iconSize: [10, 10],
-          iconAnchor: [5, 5]
-        });
-
-        const marker = L.marker([commune.lat, commune.long], { icon });
-
-        return (
-          <Popup key={commune.id} position={[commune.lat, commune.long]}>
-            <CommunePopup commune={commune} />
-          </Popup>
-        );
-      })}
-    </>
-  );
+  geoJsonData: any;
 }
 
 function MapController({ selectedCommune }: { selectedCommune: Commune | null }) {
@@ -90,20 +28,108 @@ function MapController({ selectedCommune }: { selectedCommune: Commune | null })
   return null;
 }
 
-export function HeatMap({ communes, selectedCommune }: HeatMapProps) {
+
+function CommunePolygons({ geoJsonData, communes }: { geoJsonData: any; communes: Commune[] }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!geoJsonData || !communes.length) return;
+
+    const getColor = (score: number) => {
+      if (score > 80) return '#ff0000';
+      if (score > 60) return '#ff8c00';
+      if (score > 40) return '#ffff00';
+      if (score > 20) return '#00ff00';
+      return '#0000ff';
+    };
+
+    const geoJsonLayer = L.geoJSON(geoJsonData, {
+      style: (feature) => {
+        // Trouver la commune dont les coordonnées tombent dans ce polygone
+        const communeMatch = communes.find(c => {
+          try {
+            console.log(c.long, c.lat);
+            const pt = point([c.long, c.lat]); // Attention: [longitude, latitude] pour GeoJSON
+            return booleanPointInPolygon(pt, feature as Feature<Polygon | MultiPolygon>);
+          } catch (error) {
+            return false;
+          }
+        });
+        
+        const score = communeMatch ? communeMatch.score : 0;
+        
+        console.log(`Score: ${score}, Commune: ${communeMatch?.name || 'Non trouvée'}`);
+
+        return {
+          fillColor: getColor(score),
+          weight: 2,
+          opacity: 1,
+          color: 'white',
+          fillOpacity: 0.6
+        };
+      },
+      onEachFeature: (feature, layer) => {
+        const communeMatch = communes.find(c => {
+          try {
+            const pt = point([c.long, c.lat]);
+            return booleanPointInPolygon(pt, feature as Feature<Polygon | MultiPolygon>);
+          } catch (error) {
+            return false;
+          }
+        });
+
+        if (communeMatch) {
+          layer.bindPopup(`
+            <div style="font-family: sans-serif;">
+              <h3 style="margin: 0 0 10px 0;">${communeMatch.name}</h3>
+              <p style="margin: 5px 0;"><strong>Canton:</strong> ${communeMatch.canton}</p>
+              <p style="margin: 5px 0;"><strong>Score:</strong> ${communeMatch.score.toFixed(1)}</p>
+            </div>
+          `);
+
+          layer.on({
+            mouseover: (e) => {
+              const target = e.target;
+              target.setStyle({
+                weight: 3,
+                fillOpacity: 0.8
+              });
+              target.openPopup();
+            },
+            mouseout: (e) => {
+              const target = e.target;
+              geoJsonLayer.resetStyle(target);
+            }
+          });
+        }
+      }
+    }).addTo(map);
+
+    return () => {
+      map.removeLayer(geoJsonLayer);
+    };
+  }, [geoJsonData, communes, map]);
+
+  return null;
+}
+
+export function HeatMap({ communes, selectedCommune, geoJsonData }: HeatMapProps) {
   return (
-    <MapContainer
-      center={[46.8, 8.3]}
-      zoom={8}
-      style={{ height: '100%', width: '100%' }}
-      className="rounded-lg shadow-lg"
+    <MapContainer 
+      center={[46.8, 8.3]} 
+      zoom={8} 
+      style={{ height: '100vh', width: '100%' }}
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <HeatLayer communes={communes} />
-      <CommuneMarkers communes={communes} />
+
+      {/* Polygones des communes avec scores colorés */}
+      {geoJsonData && communes.length > 0 && (
+        <CommunePolygons geoJsonData={geoJsonData} communes={communes} />
+      )}
+
       <MapController selectedCommune={selectedCommune} />
     </MapContainer>
   );
