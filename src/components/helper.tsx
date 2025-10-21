@@ -30,7 +30,6 @@ function getCantonName(cantonNumber: number): string {
   if (cantonNumber in cantons) {
     return cantons[cantonNumber];
   } else  {
-    console.log(cantonNumber,"Inconnu")
     return "Inconnu"
   }
 }

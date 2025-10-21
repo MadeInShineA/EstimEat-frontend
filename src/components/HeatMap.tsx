@@ -101,7 +101,6 @@ function CommunePolygons({
       onEachFeature: (feature, layer) => {
         const name = feature.properties.NAME?.trim().toLowerCase();
         const communeMatch = communesByName[name];
-        console.log(communeMatch);
 
         if (communeMatch) {
           const featuresList = communeMatch.features?.length

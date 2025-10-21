@@ -7,7 +7,6 @@ import { useCommunes } from './hooks/useCommunes';
 import { Commune } from './lib/supabase';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { TopCommunes } from './components/TopCommunes';
-
 function App() {
   const { communes: rawCommunes, loading, error } = useCommunes();
   const [selectedCommune, setSelectedCommune] = useState<Commune | null>(null);
@@ -24,20 +23,25 @@ function App() {
       })
       .then(data => {
         setGeoJsonData(data);
+        console.log(data)
 
         // Lier le GeoJSON à chaque commune par nom
         const dict: Record<string, any> = {};
         rawCommunes.forEach(c => {
           const feature = data.features.find(
-            (f: any) =>
-              f.properties.NAME?.trim().toLowerCase() === c.name.trim().toLowerCase()
+            (f: any) => {
+              if (f.properties.NAME?.trim().toLowerCase() === c.name.trim().toLowerCase()) {
+                return true;
+              }
+              return false;
+            }
           );
           dict[c.name.trim().toLowerCase()] = { ...c, geo: feature };
         });
         setCommunesByName(dict);
       })
       .catch(err => console.error('Erreur lors du chargement du GeoJSON:', err));
-  }, [rawCommunes]);
+  }, []);
 
   if (loading) {
     return (
