@@ -9,6 +9,7 @@ export function useCommunes() {
   useEffect(() => {
     async function fetchCommunes() {
       try {
+        console.log("test")
         setLoading(true);
         const { data, error } = await supabase
           .from('communes')

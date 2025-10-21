@@ -1,16 +1,24 @@
 import geopandas as gpd
+import fiona
 
-# Chemin vers ton GeoPackage ou Shapefile
-gpkg_path = "/home/kevivois/Desktop/HES/Courses/3eme/Hackaton/swissboundaries3d_2025-04_2056_5728.shp"
+# Chemin vers ton fichier GeoPackage (.gpkg)
+gpkg_path = "./swissboundaries3d_2025-04_2056_5728.shp"
 
-# Lire le layer des districts
-communes = gpd.read_file(gpkg_path, layer="swissBOUNDARIES3D_1_5_TLM_HOHEITSGRENZE")
+# Lister les couches (layers) disponibles
+layers = fiona.listlayers(gpkg_path)
+print("Layers disponibles :", layers)
 
-# Vérifier les premières lignes
-print(communes.head())
 
-# Convertir en WGS84 pour compatibilité avec les visualisations web
+
+layer_name = "swissBOUNDARIES3D_1_5_TLM_HOHEITSGEBIET"
+communes = gpd.read_file(gpkg_path, layer=layer_name)
+
 communes = communes.to_crs(epsg=4326)
 
-# Exporter en GeoJSON
-communes.to_file("communes.geojson", driver="GeoJSON")
+# 5️⃣ Export en GeoJSON
+output_path = "communes.geojson"
+communes.to_file(output_path, driver="GeoJSON")
+
+print(f"✅ Export terminé : {output_path}")
+print("Nombre de communes exportées :", len(communes))
+print("Colonnes disponibles :", list(communes.columns))

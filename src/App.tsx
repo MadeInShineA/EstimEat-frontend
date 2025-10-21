@@ -6,16 +6,19 @@ import { HeatMap } from './components/HeatMap';
 import { useCommunes } from './hooks/useCommunes';
 import { Commune } from './lib/supabase';
 import { AlertCircle, Loader2 } from 'lucide-react';
+import { TopCommunes } from './components/TopCommunes';
 
 function App() {
+  console.log()
   const { communes, loading, error } = useCommunes();
   const [selectedCommune, setSelectedCommune] = useState<Commune | null>(null);
 
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
 
   useEffect(() => {
-    fetch('/data/communes.geojson') // <- chemin correct depuis public/
+    fetch('/data/communes.geojson')
       .then(res => {
+        console.log("test")
         if (!res.ok) throw new Error('GeoJSON non trouvé');
         return res.json();
       })
@@ -60,9 +63,10 @@ function App() {
             <HeatMap communes={communes} selectedCommune={selectedCommune} geoJsonData={geoJsonData} />
           </div>
 
-          <div className="absolute bottom-4 right-4 z-[1000]">
+          <div className="absolute top-4 right-4 z-[1000] flex flex-col gap-2">
+            <TopCommunes communes={communes} topN={5} />
             <Legend />
-          </div>
+        </div>
         </div>
 
         <div className="text-center text-sm text-gray-500">
