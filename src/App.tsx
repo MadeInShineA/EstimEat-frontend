@@ -8,7 +8,8 @@ import { Commune } from './lib/supabase';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { TopCommunes } from './components/TopCommunes';
 function App() {
-  const { communes: rawCommunes, loading, error } = useCommunes();
+  const { communes: rawCommunes, loading: communeLoading, error } = useCommunes();
+  const [loading, setLoading] = useState(communeLoading);
   const [selectedCommune, setSelectedCommune] = useState<Commune | null>(null);
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
 
@@ -16,6 +17,7 @@ function App() {
   const [communesByName, setCommunesByName] = useState<Record<string, any>>({});
 
   useEffect(() => {
+    setLoading(true);
     fetch('/data/communes.geojson')
       .then(res => {
         if (!res.ok) throw new Error('GeoJSON non trouvé');
@@ -23,25 +25,31 @@ function App() {
       })
       .then(data => {
         setGeoJsonData(data);
-        console.log(data)
+      })
+      .catch(err => console.error('Erreur lors du chargement du GeoJSON:', err));
+  }, []);
 
-        // Lier le GeoJSON à chaque commune par nom
+  useEffect(() => {
+    setLoading(true)
+
+    if (!geoJsonData || rawCommunes.length === 0) return;
         const dict: Record<string, any> = {};
         rawCommunes.forEach(c => {
-          const feature = data.features.find(
+          const feature = geoJsonData.features.find(
             (f: any) => {
-              if (f.properties.NAME?.trim().toLowerCase() === c.name.trim().toLowerCase()) {
-                return true;
+              try {
+                return f.properties.NAME?.trim().toLowerCase() === c.name.trim().toLowerCase()
               }
-              return false;
+              catch(error){
+                return false
+              }
             }
           );
           dict[c.name.trim().toLowerCase()] = { ...c, geo: feature };
         });
         setCommunesByName(dict);
-      })
-      .catch(err => console.error('Erreur lors du chargement du GeoJSON:', err));
-  }, []);
+        setLoading(false);
+      }, [geoJsonData, rawCommunes]);
 
   if (loading) {
     return (

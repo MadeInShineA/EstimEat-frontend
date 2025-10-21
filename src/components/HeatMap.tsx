@@ -101,7 +101,6 @@ function CommunePolygons({
       onEachFeature: (feature, layer) => {
         const name = feature.properties.NAME?.trim().toLowerCase();
         const communeMatch = communesByName[name];
-
         if (communeMatch) {
           const featuresList = communeMatch.features?.length
             ? `<ul style="margin: 5px 0 0 0; padding-left: 20px;">
@@ -109,7 +108,7 @@ function CommunePolygons({
               </ul>`
             : "<p style='margin: 5px 0;'>Aucune caractéristique disponible.</p>";
 
-          layer.bindPopup(`
+          layer.bindTooltip(`
             <div style="font-family: sans-serif;">
               <h3 style="margin: 0 0 10px 0;">${communeMatch.name}</h3>
               <p style="margin: 5px 0;"><strong>Canton:</strong> ${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</p>
