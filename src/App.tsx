@@ -26,7 +26,7 @@ function App() {
     if (!geoJsonData || rawCommunes.length === 0) return {};
     
     const dict: Record<string, any> = {};
-    rawCommunes.forEach(c => {
+    filteredCommunes.forEach(c => {
       const feature = geoJsonData.features.find(
         (f: any) => {
           try {

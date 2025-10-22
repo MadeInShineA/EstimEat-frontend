@@ -41,10 +41,12 @@ const CommunePolygons = memo(function CommunePolygons({
   geoJsonData,
   communes,
   communesByName,
+  selectedCommune,
 }: {
   geoJsonData: any;
   communes: Commune[];
   communesByName: Record<string, any>;
+  selectedCommune: Commune | null;
 }) {
   const map = useMap();
 
@@ -91,12 +93,17 @@ const CommunePolygons = memo(function CommunePolygons({
         const communeMatch = communesByName[name];
         const score = communeMatch ? communeMatch.score : 0;
         
+        // Check if this is the selected commune
+        const isSelected = selectedCommune && 
+          selectedCommune.name.trim().toLowerCase() === name;
+        
         return {
           fillColor: getColor(score),
-          weight: 1.5,
-          color: 'rgba(15, 23, 42, 0.8)',
-          opacity: 0.8,
-          fillOpacity: 0.75,
+          weight: isSelected ? 4 : 1.5,
+          color: isSelected ? '#10b981' : 'rgba(15, 23, 42, 0.8)',
+          opacity: 1,
+          fillOpacity: isSelected ? 0.9 : 0.75,
+          dashArray: isSelected ? '10, 5' : undefined,
         };
       },
       onEachFeature: (feature, layer) => {
@@ -134,11 +141,17 @@ const CommunePolygons = memo(function CommunePolygons({
 
         layer.on({
           mouseover: (e) => {
-            e.target.setStyle({
-              weight: 3,
-              fillOpacity: 0.95,
-              color: 'rgba(16, 185, 129, 0.9)'
-            });
+            const name = feature.properties.NAME?.trim().toLowerCase();
+            const isSelected = selectedCommune && 
+              selectedCommune.name.trim().toLowerCase() === name;
+            
+            if (!isSelected) {
+              e.target.setStyle({
+                weight: 3,
+                fillOpacity: 0.95,
+                color: 'rgba(16, 185, 129, 0.9)'
+              });
+            }
             e.target.openPopup();
           },
           mouseout: (e) => {
@@ -152,7 +165,7 @@ const CommunePolygons = memo(function CommunePolygons({
     return () => {
       map.removeLayer(geoJsonLayer);
     };
-  }, [geoJsonData, communesByName, map, communes, getColor]);
+  }, [geoJsonData, communesByName, map, communes, getColor, selectedCommune]);
 
   return null;
 });
@@ -185,6 +198,7 @@ export const HeatMap = memo(function HeatMap({
           geoJsonData={geoJsonData}
           communes={communes}
           communesByName={communesByName}
+          selectedCommune={selectedCommune}
         />
       )}
 
