@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, memo } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -12,9 +12,8 @@ interface HeatMapProps {
   communesByName: Record<string, any>;
 }
 
-function MapController({
+const MapController = memo(function MapController({
   selectedCommune,
-  geoJsonData,
   communesByName,
 }: {
   selectedCommune: Commune | null;
@@ -36,9 +35,9 @@ function MapController({
   }, [selectedCommune, communesByName, map]);
 
   return null;
-}
+});
 
-function CommunePolygons({
+const CommunePolygons = memo(function CommunePolygons({
   geoJsonData,
   communes,
   communesByName,
@@ -49,27 +48,26 @@ function CommunePolygons({
 }) {
   const map = useMap();
 
-  useEffect(() => {
-    if (!geoJsonData || !communes.length) return;
+  // Memoize color function with improved gradient
+  const getColor = useMemo(() => {
+    const min = Math.min(...communes.map(c => c.score));
+    const max = Math.max(...communes.map(c => c.score));
 
-    const getColor = (
-    score: number | null | undefined,
-    minScore: number = -50,
-    maxScore: number = 100 ) => {
-      if (score == null) return 'rgb(0, 0, 0)'; // noir pour score manquant
+    return (score: number | null | undefined) => {
+      if (score == null) return 'rgb(30, 41, 59)';
 
-      // Clamp le score dans la plage min/max
-      const clamped = Math.max(minScore, Math.min(maxScore, score));
+      const clamped = Math.max(min, Math.min(max, score));
+      const s = (clamped - min) / (max - min);
 
-      // Normalisation entre 0 et 1
-      const s = (clamped - minScore) / (maxScore - minScore);
-
+      // Nouveau gradient professionnel: Bleu foncé → Cyan → Vert → Jaune/Orange → Rouge vif
       const stops = [
-        { stop: 0.0, color: [0, 0, 255] },    // bleu = plus bas
-        { stop: 0.25, color: [0, 255, 255] }, // cyan
-        { stop: 0.5, color: [0, 255, 0] },    // vert = 0 ou milieu
-        { stop: 0.75, color: [255, 255, 0] }, // jaune
-        { stop: 1.0, color: [255, 0, 0] }     // rouge = plus haut
+        { stop: 0.0, color: [30, 58, 138] },    // Bleu foncé (indigo-900)
+        { stop: 0.2, color: [59, 130, 246] },   // Bleu vif (blue-500)
+        { stop: 0.4, color: [6, 182, 212] },    // Cyan (cyan-500)
+        { stop: 0.6, color: [34, 197, 94] },    // Vert (green-500)
+        { stop: 0.75, color: [251, 191, 36] },  // Jaune/Orange (amber-400)
+        { stop: 0.9, color: [249, 115, 22] },   // Orange vif (orange-500)
+        { stop: 1.0, color: [239, 68, 68] }     // Rouge vif (red-500)
       ];
 
       let i = 0;
@@ -81,21 +79,24 @@ function CommunePolygons({
       const b = Math.round(stops[i].color[2] + t * (stops[i + 1].color[2] - stops[i].color[2]));
 
       return `rgb(${r}, ${g}, ${b})`;
-  };
+    };
+  }, [communes]);
+
+  useEffect(() => {
+    if (!geoJsonData || !communes.length) return;
 
     const geoJsonLayer = L.geoJSON(geoJsonData, {
       style: (feature: any) => {
         const name = feature.properties.NAME?.trim().toLowerCase();
         const communeMatch = communesByName[name];
         const score = communeMatch ? communeMatch.score : 0;
-        const min = Math.min(...communes.map(c => c.score));
-        const max = Math.max(...communes.map(c => c.score));
+        
         return {
-          fillColor: getColor(score, min, max),
-          weight: 1,
-          color: 'black',
-          opacity: 0.7,
-          fillOpacity: 0.6,
+          fillColor: getColor(score),
+          weight: 1.5,
+          color: 'rgba(15, 23, 42, 0.8)',
+          opacity: 0.8,
+          fillOpacity: 0.75,
         };
       },
       onEachFeature: (feature, layer) => {
@@ -103,25 +104,41 @@ function CommunePolygons({
         const communeMatch = communesByName[name];
         if (communeMatch) {
           const featuresList = communeMatch.features?.length
-            ? `<ul style="margin: 5px 0 0 0; padding-left: 20px;">
-                ${communeMatch.features.map((f:any) => `<li>${f}</li>`).join('')}
+            ? `<ul style="margin: 8px 0 0 0; padding-left: 20px; list-style: disc;">
+                ${communeMatch.features.map((f: any) => `<li style="margin: 4px 0; color: #94a3b8;">${f}</li>`).join('')}
               </ul>`
-            : "<p style='margin: 5px 0;'>Aucune caractéristique disponible.</p>";
+            : "<p style='margin: 8px 0; color: #94a3b8; font-style: italic;'>No features available</p>";
 
           layer.bindTooltip(`
-            <div style="font-family: sans-serif;">
-              <h3 style="margin: 0 0 10px 0;">${communeMatch.name}</h3>
-              <p style="margin: 5px 0;"><strong>Canton:</strong> ${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</p>
-              <p style="margin: 5px 0;"><strong>Score:</strong> ${communeMatch.score.toFixed(1)}</p>
-              <h4 style="margin: 10px 0 5px 0;">Caractéristiques :</h4>
+            <div style="font-family: system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 16px; border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);">
+              <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: 700; color: #fff; border-bottom: 2px solid rgba(16, 185, 129, 0.3); padding-bottom: 8px;">${communeMatch.name}</h3>
+              <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+                <div>
+                  <p style="margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; font-weight: 600;">Canton</p>
+                  <p style="margin: 4px 0 0 0; font-size: 14px; font-weight: 600; color: #10b981;">${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</p>
+                </div>
+                <div>
+                  <p style="margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; font-weight: 600;">Score</p>
+                  <p style="margin: 4px 0 0 0; font-size: 18px; font-weight: 700; color: #10b981;">${communeMatch.score.toFixed(1)}</p>
+                </div>
+              </div>
+              <h4 style="margin: 12px 0 4px 0; font-size: 13px; font-weight: 600; color: #e2e8f0; text-transform: uppercase; letter-spacing: 0.5px;">Key Features</h4>
               ${featuresList}
             </div>
-          `);
+          `, {
+            className: 'custom-tooltip',
+            direction: 'top',
+            opacity: 1
+          });
         }
 
         layer.on({
           mouseover: (e) => {
-            e.target.setStyle({ weight: 3, fillOpacity: 0.8 });
+            e.target.setStyle({
+              weight: 3,
+              fillOpacity: 0.95,
+              color: 'rgba(16, 185, 129, 0.9)'
+            });
             e.target.openPopup();
           },
           mouseout: (e) => {
@@ -132,13 +149,15 @@ function CommunePolygons({
       },
     }).addTo(map);
 
-    return () => {map.removeLayer(geoJsonLayer)};
-  }, [geoJsonData, communesByName, map]);
+    return () => {
+      map.removeLayer(geoJsonLayer);
+    };
+  }, [geoJsonData, communesByName, map, communes, getColor]);
 
   return null;
-}
+});
 
-export function HeatMap({
+export const HeatMap = memo(function HeatMap({
   communes,
   selectedCommune,
   geoJsonData,
@@ -148,15 +167,17 @@ export function HeatMap({
     <MapContainer
       center={[46.8, 8.2275]}
       zoom={8}
-      style={{ height: '100vh', width: '100%' }}
+      style={{ height: '100%', width: '100%' }}
       maxBounds={[[45.5, 5.5], [47.9, 10.7]]}
       maxBoundsViscosity={1.0}
       minZoom={7}
-      maxZoom={12}
+      maxZoom={13}
+      zoomControl={false}
+      preferCanvas={true}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
       />
 
       {geoJsonData && communes.length > 0 && (
@@ -174,4 +195,4 @@ export function HeatMap({
       />
     </MapContainer>
   );
-}
+});
