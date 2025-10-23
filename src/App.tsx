@@ -12,26 +12,34 @@ const LandingPage = lazy(() => import('./components/LandingPage').then(module =>
 const TopCommunes = lazy(() => import('./components/TopCommunes').then(module => ({ default: module.TopCommunes })));
 
 function App() {
-  const { communes: rawCommunes, versions, loading: communeLoading, error } = useCommunes();
+  const { communes: rawCommunes, loading: communeLoading, error } = useCommunes();
   const [loading, setLoading] = useState(communeLoading);
   const [selectedCommune, setSelectedCommune] = useState<Commune | null>(null);
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
-  const [selectedVersion, setSelectedVersion] = useState<number | null>(null);
+
   const [showLanding, setShowLanding] = useState(true);
   const [isDark, setIsDark] = useState(false);
+  const [scoreType, setScoreType] = useState<string>('total');
 
-  // Memoize filtered communes
-  const filteredCommunes = useMemo(() => {
-    if (!selectedVersion) return rawCommunes.filter((c) => c.version === versions[0]);
-    return rawCommunes.filter((c) => c.version === selectedVersion);
-  }, [rawCommunes, selectedVersion, versions]);
+  // Memoize communes with score based on scoreType
+  const communesWithScore = useMemo(() => {
+    return rawCommunes.map(c => ({
+      ...c,
+      score: scoreType === 'total' ? c.total_score || 0 :
+        scoreType === 'third_sector_job_score' ? c.third_sector_job_score || 0 :
+          scoreType === 'building_score' ? c.building_score || 0 :
+            scoreType === 'demographie_score' ? c.demographie_score || 0 :
+              scoreType === 'restau_score' ? c.restau_score || 0 :
+                scoreType === 'third_sector_establishment_score' ? c.third_sector_establishment_score || 0 : 0
+    }));
+  }, [rawCommunes, scoreType]);
 
   // Memoize communes by name mapping
   const communesByName = useMemo(() => {
     if (!geoJsonData || rawCommunes.length === 0) return {};
 
     const dict: Record<string, any> = {};
-    filteredCommunes.forEach(c => {
+    communesWithScore.forEach(c => {
       const feature = geoJsonData.features.find(
         (f: any) => {
           try {
@@ -44,7 +52,7 @@ function App() {
       dict[c.name.trim().toLowerCase()] = { ...c, geo: feature };
     });
     return dict;
-  }, [geoJsonData, filteredCommunes]); // Changed to filteredCommunes for better performance
+  }, [geoJsonData, communesWithScore]);
 
   // Load GeoJSON once with preload
   useEffect(() => {
@@ -74,12 +82,7 @@ function App() {
       });
   }, []);
 
-  // Handle version change with useCallback
-  const handleVersionChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    const ver = Number(e.target.value);
-    setSelectedVersion(ver);
-    setSelectedCommune(null);
-  }, []);
+
 
   // Handle commune selection with useCallback
   const handleCommuneSelect = useCallback((commune: Commune) => {
@@ -145,39 +148,39 @@ function App() {
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
       <Header showBackButton={true} onBackClick={() => setShowLanding(true)} isDark={isDark} onToggleTheme={toggleTheme} />
-      
+
       {/* Top Banner - Search + Top Communes */}
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 px-4 sm:px-6 lg:px-8 py-3 shadow-lg z-10 transition-colors duration-500">
-        <div className="max-w-[1800px] mx-auto flex items-center gap-4">
-          {/* Search Bar */}
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <SearchBar 
-              rawCommunes={filteredCommunes} 
-              communesByName={communesByName} 
-              onSelect={handleCommuneSelect} 
+        <div className="max-w-[1800px] mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-4">
+          {/* Search Bar and Select */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 flex-shrink-0 w-full lg:w-auto">
+            <SearchBar
+              rawCommunes={communesWithScore}
+              communesByName={communesByName}
+              onSelect={handleCommuneSelect}
             />
-            <div>
-              <label htmlFor="version-select" className="sr-only">Version</label>
+            <div className="w-full sm:w-auto">
+              <label htmlFor="score-type-select" className="sr-only">Score Type</label>
               <select
-                id="version-select"
-                value={selectedVersion || versions[0] || ''}
-                onChange={handleVersionChange}
+                id="score-type-select"
+                value={scoreType}
+                onChange={(e) => setScoreType(e.target.value)}
                 className="block w-auto glass dark:glass-dark rounded-xl border border-white/30 dark:border-gray-600/30 py-2 px-3 text-sm shadow-lg hover:shadow-xl transition-all duration-300 focus-modern text-slate-900 dark:text-slate-100"
               >
-                {versions?.map((v) => (
-                  <option key={String(v)} value={String(v)} className="text-slate-900 dark:text-slate-100 bg-white dark:bg-gray-800">{String(v)}</option>
-                ))}
+                <option value="total" className="text-slate-900 dark:text-slate-100 bg-white dark:bg-gray-800">Global Score</option>
+                <option value="third_sector_job_score" className="text-slate-900 dark:text-slate-100 bg-white dark:bg-gray-800">Third Sector Job</option>
+                <option value="building_score" className="text-slate-900 dark:text-slate-100 bg-white dark:bg-gray-800">Building</option>
+                <option value="demographie_score" className="text-slate-900 dark:text-slate-100 bg-white dark:bg-gray-800">Demography</option>
+                <option value="restau_score" className="text-slate-900 dark:text-slate-100 bg-white dark:bg-gray-800">Restaurant</option>
+                <option value="third_sector_establishment_score" className="text-slate-900 dark:text-slate-100 bg-white dark:bg-gray-800">Third Sector Establishment</option>
               </select>
             </div>
           </div>
 
-          {/* Vertical Divider */}
-          <div className="h-12 w-px bg-gray-200"></div>
-
-          {/* Top Communes Horizontal */}
-          <div className="flex-1 overflow-x-auto">
+          {/* Top Communes Horizontal - Hidden on small screens */}
+          <div className="hidden lg:flex flex-1 overflow-hidden">
             <Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 rounded h-8 w-32"></div>}>
-              <TopCommunes communes={filteredCommunes} communesByName={communesByName} topN={5} />
+              <TopCommunes communes={communesWithScore} communesByName={communesByName} topN={3} />
             </Suspense>
           </div>
         </div>
@@ -191,11 +194,12 @@ function App() {
           </div>
         }>
           <HeatMap
-            communes={filteredCommunes}
+            communes={communesWithScore}
             selectedCommune={selectedCommune}
             geoJsonData={geoJsonData}
             communesByName={communesByName}
             isDark={isDark}
+            scoreType={scoreType}
           />
         </Suspense>
       </div>

@@ -10,7 +10,7 @@ interface TopCommunesProps {
 }
 
 export const TopCommunes = memo(function TopCommunes({ communes, topN = 5, communesByName }: TopCommunesProps) {
-  const sorted = useMemo(() => 
+  const sorted = useMemo(() =>
     [...communes].sort((a, b) => b.score - a.score).slice(0, topN),
     [communes, topN]
   );
@@ -30,7 +30,6 @@ export const TopCommunes = memo(function TopCommunes({ communes, topN = 5, commu
 
   return (
     <div className="flex items-center gap-4">
-      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider whitespace-nowrap">Top {topN}:</span>
       <div className="flex items-center gap-4 overflow-x-auto pb-1">
         {sorted.map((c, idx) => (
           <div

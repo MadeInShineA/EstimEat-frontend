@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import { Search } from 'lucide-react';
 import { Commune } from '../lib/supabase';
 import { getCantonName } from './helper';
 
@@ -19,12 +18,9 @@ export const SearchBar = memo(function SearchBar({ rawCommunes, communesByName, 
 
   return (
     <div className="relative">
-      <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10">
-        <Search className="h-5 w-5 text-slate-400 dark:text-slate-500" strokeWidth={2} />
-      </div>
       <select
         onChange={handleChange}
-        className="block w-full pl-14 pr-12 py-4 glass dark:glass-dark rounded-2xl focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 text-slate-900 dark:text-slate-100 text-base shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300 cursor-pointer appearance-none focus-modern"
+        className="block w-auto glass dark:glass-dark rounded-xl border border-white/30 dark:border-gray-600/30 py-2 px-3 text-sm shadow-lg hover:shadow-xl transition-all duration-300 focus-modern text-slate-900 dark:text-slate-100"
         defaultValue=""
       >
         <option value="" disabled className="text-slate-500 dark:text-slate-400 bg-white dark:bg-gray-800">
@@ -36,11 +32,7 @@ export const SearchBar = memo(function SearchBar({ rawCommunes, communesByName, 
           </option>
         ))}
       </select>
-      <div className="absolute inset-y-0 right-0 pr-5 flex items-center pointer-events-none">
-        <svg className="w-4 h-4 text-slate-400 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </div>
+
     </div>
   );
 });

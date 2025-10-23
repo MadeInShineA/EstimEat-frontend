@@ -21,5 +21,11 @@ export interface Commune {
   features: string[];
   extra_info: string;
   version: number;
+  third_sector_job_score?: number;
+  building_score?: number;
+  demographie_score?: number;
+  restau_score?: number;
+  third_sector_establishment_score?: number;
+  total_score?: number;
 }
 

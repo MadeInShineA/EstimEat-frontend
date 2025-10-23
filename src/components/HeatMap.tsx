@@ -1,7 +1,7 @@
-import { useEffect, useMemo, memo } from 'react';
-import { MapContainer, TileLayer, useMap } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+ import { useEffect, useMemo, memo, useState } from 'react';
+ import { MapContainer, TileLayer, useMap } from 'react-leaflet';
+ import L from 'leaflet';
+ import 'leaflet/dist/leaflet.css';
 import { Commune } from '../lib/supabase';
 import { getCantonName } from './helper';
 
@@ -11,7 +11,71 @@ interface HeatMapProps {
   geoJsonData: any;
   communesByName: Record<string, any>;
   isDark: boolean;
+  scoreType?: string;
 }
+
+const FullscreenButton = memo(function FullscreenButton({ isDark }: { isDark: boolean }) {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = () => {
+    const mapContainer = document.querySelector('.leaflet-container')?.parentElement;
+    if (!mapContainer) return;
+
+    if (!document.fullscreenElement) {
+      mapContainer.requestFullscreen().then(() => {
+        setIsFullscreen(true);
+      }).catch(err => {
+        console.error('Error attempting to enable fullscreen:', err);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsFullscreen(false);
+      }).catch(err => {
+        console.error('Error attempting to exit fullscreen:', err);
+      });
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  return (
+    <button
+      onClick={toggleFullscreen}
+      className={`absolute top-2 right-2 z-[1000] p-2 rounded-md shadow-md transition-colors ${
+        isDark
+          ? 'bg-gray-800 text-white hover:bg-gray-700 border border-gray-600'
+          : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
+      }`}
+      title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {isFullscreen ? (
+          // Minimize icon
+          <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 0 2-2h3M3 16h3a2 2 0 0 0 2 2v3"/>
+        ) : (
+          // Maximize icon
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+        )}
+      </svg>
+    </button>
+  );
+});
 
 const MapController = memo(function MapController({
   selectedCommune,
@@ -44,12 +108,14 @@ const CommunePolygons = memo(function CommunePolygons({
   communesByName,
   selectedCommune,
   isDark,
+  scoreType,
 }: {
   geoJsonData: any;
   communes: Commune[];
   communesByName: Record<string, any>;
   selectedCommune: Commune | null;
   isDark: boolean;
+  scoreType: string;
 }) {
   const map = useMap();
 
@@ -95,11 +161,11 @@ const CommunePolygons = memo(function CommunePolygons({
         const name = feature.properties.NAME?.trim().toLowerCase();
         const communeMatch = communesByName[name];
         const score = communeMatch ? communeMatch.score : 0;
-        
+
         // Check if this is the selected commune
-        const isSelected = selectedCommune && 
+        const isSelected = selectedCommune &&
           selectedCommune.name.trim().toLowerCase() === name;
-        
+
         return {
           fillColor: getColor(score),
           weight: isSelected ? 4 : 1.5,
@@ -113,41 +179,59 @@ const CommunePolygons = memo(function CommunePolygons({
         const name = feature.properties.NAME?.trim().toLowerCase();
         const communeMatch = communesByName[name];
         if (communeMatch) {
-          const featuresList = communeMatch.features?.length
-            ? `<ul style="margin: 8px 0 0 0; padding-left: 20px; list-style: disc;">
-                ${communeMatch.features.map((f: any) => `<li style="margin: 4px 0; color: #94a3b8;">${f}</li>`).join('')}
-              </ul>`
-            : "<p style='margin: 8px 0; color: #94a3b8; font-style: italic;'>No features available</p>";
+          const scoreLabel = scoreType === 'total' ? 'Global Score' :
+            scoreType === 'third_sector_job_score' ? 'Third Sector Job Score' :
+              scoreType === 'building_score' ? 'Building Score' :
+                scoreType === 'demographie_score' ? 'Demography Score' :
+                  scoreType === 'restau_score' ? 'Restaurant Score' :
+                    scoreType === 'third_sector_establishment_score' ? 'Third Sector Establishment Score' : 'Score';
 
-          layer.bindTooltip(`
-            <div class="tooltip-content ${isDark ? 'dark' : 'light'}">
+          const textColor = isDark ? '#e5e7eb' : '#374151';
+
+          let tooltipContent = `
+            <div class="tooltip-content ${isDark ? 'dark' : 'light'}" style="z-index: 10000;">
               <h3 class="tooltip-title">${communeMatch.name}</h3>
-              <div class="tooltip-stats">
-                <div class="tooltip-stat">
-                  <span class="tooltip-label">Canton</span>
-                  <span class="tooltip-value">${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</span>
+              <div class="tooltip-stats" style="display: flex; flex-direction: column;">
+                <div class="tooltip-canton">
+                  <div class="tooltip-label">Canton</div>
+                  <div class="tooltip-value">${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</div>
                 </div>
-                <div class="tooltip-stat">
-                  <span class="tooltip-label">Score</span>
-                  <span class="tooltip-value">${communeMatch.score.toFixed(1)}</span>
+                <div class="tooltip-score-main">
+                  <div class="tooltip-label">${scoreLabel}</div>
+                  <div class="tooltip-value">${communeMatch.score.toFixed(1)}</div>
                 </div>
-              </div>
-              <h4 class="tooltip-features-title">Key Features</h4>
-              ${featuresList}
-            </div>
-          `, {
+              </div>`;
+
+          if (scoreType === 'total') {
+            tooltipContent += `
+              <h4 class="tooltip-scores-title" style="color: ${textColor};">Score Details</h4>
+              <ul style="margin: 8px 0 0 0; padding-left: 20px; list-style: disc;">
+                <li style="margin: 4px 0; color: ${textColor};">Third Sector Job: ${(communeMatch.third_sector_job_score || 0).toFixed(1)}</li>
+                <li style="margin: 4px 0; color: ${textColor};">Building: ${(communeMatch.building_score || 0).toFixed(1)}</li>
+                <li style="margin: 4px 0; color: ${textColor};">Demography: ${(communeMatch.demographie_score || 0).toFixed(1)}</li>
+                <li style="margin: 4px 0; color: ${textColor};">Restaurant: ${(communeMatch.restau_score || 0).toFixed(1)}</li>
+                <li style="margin: 4px 0; color: ${textColor};">Third Sector Est.: ${(communeMatch.third_sector_establishment_score || 0).toFixed(1)}</li>
+              </ul>`;
+          }
+
+          tooltipContent += `
+            </div>`;
+
+          layer.bindTooltip(tooltipContent, {
             className: 'custom-tooltip',
             direction: 'top',
-            opacity: 1
+            opacity: 1,
+            permanent: false,
+            sticky: false
           });
         }
 
         layer.on({
           mouseover: (e) => {
             const name = feature.properties.NAME?.trim().toLowerCase();
-            const isSelected = selectedCommune && 
+            const isSelected = selectedCommune &&
               selectedCommune.name.trim().toLowerCase() === name;
-            
+
             if (!isSelected) {
               e.target.setStyle({
                 weight: 3,
@@ -181,43 +265,48 @@ export const HeatMap = memo(function HeatMap({
   geoJsonData,
   communesByName,
   isDark,
+  scoreType = 'total',
 }: HeatMapProps) {
   return (
-    <MapContainer
-      center={[46.8, 8.2275]}
-      zoom={8}
-      style={{ height: '100%', width: '100%' }}
-      maxBounds={[[45.5, 5.5], [47.9, 10.7]]}
-      maxBoundsViscosity={1.0}
-      minZoom={7}
-      maxZoom={13}
-      zoomControl={true}
-      preferCanvas={true}
-      className={`modern-map ${isDark ? 'dark-theme' : 'light-theme'}`}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url={isDark
-          ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-          : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-        }
-      />
-
-      {geoJsonData && communes.length > 0 && (
-        <CommunePolygons
-          geoJsonData={geoJsonData}
-          communes={communes}
-          communesByName={communesByName}
-          selectedCommune={selectedCommune}
-          isDark={isDark}
+    <div className="relative w-full h-full">
+      <MapContainer
+        center={[46.8, 8.2275]}
+        zoom={8}
+        style={{ height: '100%', width: '100%' }}
+        maxBounds={[[45.5, 5.5], [47.9, 10.7]]}
+        maxBoundsViscosity={1.0}
+        minZoom={7}
+        maxZoom={13}
+        zoomControl={true}
+        preferCanvas={true}
+        className={`modern-map ${isDark ? 'dark-theme' : 'light-theme'}`}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          url={isDark
+            ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          }
         />
-      )}
 
-      <MapController
-        selectedCommune={selectedCommune}
-        geoJsonData={geoJsonData}
-        communesByName={communesByName}
-      />
-    </MapContainer>
+        {geoJsonData && communes.length > 0 && (
+          <CommunePolygons
+            geoJsonData={geoJsonData}
+            communes={communes}
+            communesByName={communesByName}
+            selectedCommune={selectedCommune}
+            isDark={isDark}
+            scoreType={scoreType}
+          />
+        )}
+
+        <MapController
+          selectedCommune={selectedCommune}
+          geoJsonData={geoJsonData}
+          communesByName={communesByName}
+        />
+      </MapContainer>
+      <FullscreenButton isDark={isDark} />
+    </div>
   );
 });
