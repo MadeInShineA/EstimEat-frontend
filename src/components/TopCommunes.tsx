@@ -29,25 +29,25 @@ export const TopCommunes = memo(function TopCommunes({ communes, topN = 5, commu
   };
 
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide whitespace-nowrap">Top {topN}:</span>
+    <div className="flex items-center gap-4">
+      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider whitespace-nowrap">Top {topN}:</span>
       <div className="flex items-center gap-4 overflow-x-auto pb-1">
         {sorted.map((c, idx) => (
           <div
             key={c.id}
-            className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-br from-gray-50 to-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow whitespace-nowrap flex-shrink-0"
+            className="group flex items-center gap-3 px-4 py-2 glass dark:glass-dark rounded-2xl border border-white/30 dark:border-gray-600/30 shadow-lg hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-1 whitespace-nowrap flex-shrink-0"
           >
             <div className="flex-shrink-0">
               {getIcon(idx)}
             </div>
             <div className="flex items-center gap-2">
               <div>
-                <h4 className="font-semibold text-gray-900 text-sm">{c.name}</h4>
-                <p className="text-xs text-gray-500">
+                <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300">{c.name}</h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors duration-300">
                   {getCantonName(communesByName[c.name.trim().toLowerCase()]?.geo?.properties?.KANTONSNUM)}
                 </p>
               </div>
-              <div className="ml-2 pl-2 border-l border-gray-200">
+              <div className="ml-3 pl-3 border-l border-white/30 dark:border-gray-600/50">
                 <span className="text-lg font-bold text-emerald-600 tabular-nums">{c.score.toFixed(1)}</span>
               </div>
             </div>

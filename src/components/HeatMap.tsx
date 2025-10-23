@@ -10,6 +10,7 @@ interface HeatMapProps {
   selectedCommune: Commune | null;
   geoJsonData: any;
   communesByName: Record<string, any>;
+  isDark: boolean;
 }
 
 const MapController = memo(function MapController({
@@ -42,11 +43,13 @@ const CommunePolygons = memo(function CommunePolygons({
   communes,
   communesByName,
   selectedCommune,
+  isDark,
 }: {
   geoJsonData: any;
   communes: Commune[];
   communesByName: Record<string, any>;
   selectedCommune: Commune | null;
+  isDark: boolean;
 }) {
   const map = useMap();
 
@@ -117,20 +120,20 @@ const CommunePolygons = memo(function CommunePolygons({
             : "<p style='margin: 8px 0; color: #94a3b8; font-style: italic;'>No features available</p>";
 
           layer.bindTooltip(`
-            <div style="font-family: system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 12px; padding: 16px; border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);">
-              <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: 700; color: #fff; border-bottom: 2px solid rgba(16, 185, 129, 0.3); padding-bottom: 8px;">${communeMatch.name}</h3>
-              <div style="display: flex; gap: 16px; margin-bottom: 12px;">
-                <div>
-                  <p style="margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; font-weight: 600;">Canton</p>
-                  <p style="margin: 4px 0 0 0; font-size: 14px; font-weight: 600; color: #10b981;">${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</p>
+            <div style="font-family: system-ui, -apple-system, sans-serif; background: ${isDark ? 'linear-gradient(135deg, #1e293b 0%, #334155 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)'}; border-radius: 16px; padding: 20px; border: 2px solid ${isDark ? 'rgba(16, 185, 129, 0.4)' : 'rgba(16, 185, 129, 0.3)'}; box-shadow: 0 25px 50px -12px ${isDark ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.15)'}; backdrop-filter: blur(10px);">
+              <h3 style="margin: 0 0 16px 0; font-size: 20px; font-weight: 800; color: ${isDark ? '#f1f5f9' : '#0f172a'}; border-bottom: 3px solid rgba(16, 185, 129, 0.5); padding-bottom: 10px; text-shadow: ${isDark ? '0 1px 2px rgba(0,0,0,0.5)' : 'none'};">${communeMatch.name}</h3>
+              <div style="display: flex; gap: 20px; margin-bottom: 16px;">
+                <div style="background: ${isDark ? 'rgba(16, 185, 129, 0.1)' : 'rgba(16, 185, 129, 0.05)'}; padding: 12px; border-radius: 12px; border: 1px solid ${isDark ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.1)'};">
+                  <p style="margin: 0; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: ${isDark ? '#94a3b8' : '#64748b'}; font-weight: 700;">Canton</p>
+                  <p style="margin: 6px 0 0 0; font-size: 16px; font-weight: 700; color: #10b981; text-shadow: 0 1px 2px rgba(16, 185, 129, 0.3);">${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</p>
                 </div>
-                <div>
-                  <p style="margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; font-weight: 600;">Score</p>
-                  <p style="margin: 4px 0 0 0; font-size: 18px; font-weight: 700; color: #10b981;">${communeMatch.score.toFixed(1)}</p>
+                <div style="background: ${isDark ? 'rgba(16, 185, 129, 0.1)' : 'rgba(16, 185, 129, 0.05)'}; padding: 12px; border-radius: 12px; border: 1px solid ${isDark ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.1)'};">
+                  <p style="margin: 0; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: ${isDark ? '#94a3b8' : '#64748b'}; font-weight: 700;">Score</p>
+                  <p style="margin: 6px 0 0 0; font-size: 20px; font-weight: 800; color: #10b981; text-shadow: 0 1px 2px rgba(16, 185, 129, 0.3);">${communeMatch.score.toFixed(1)}</p>
                 </div>
               </div>
-              <h4 style="margin: 12px 0 4px 0; font-size: 13px; font-weight: 600; color: #e2e8f0; text-transform: uppercase; letter-spacing: 0.5px;">Key Features</h4>
-              ${featuresList}
+              <h4 style="margin: 16px 0 8px 0; font-size: 14px; font-weight: 700; color: ${isDark ? '#e2e8f0' : '#374151'}; text-transform: uppercase; letter-spacing: 1px;">Key Features</h4>
+              ${featuresList.replace(/color: #94a3b8/g, `color: ${isDark ? '#cbd5e1' : '#4b5563'}`).replace(/color: #64748b/g, `color: ${isDark ? '#94a3b8' : '#6b7280'}`)}
             </div>
           `, {
             className: 'custom-tooltip',
@@ -175,6 +178,7 @@ export const HeatMap = memo(function HeatMap({
   selectedCommune,
   geoJsonData,
   communesByName,
+  isDark,
 }: HeatMapProps) {
   return (
     <MapContainer
@@ -185,12 +189,16 @@ export const HeatMap = memo(function HeatMap({
       maxBoundsViscosity={1.0}
       minZoom={7}
       maxZoom={13}
-      zoomControl={false}
+      zoomControl={true}
       preferCanvas={true}
+      className="modern-map"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+        url={isDark
+          ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+        }
       />
 
       {geoJsonData && communes.length > 0 && (
@@ -199,6 +207,7 @@ export const HeatMap = memo(function HeatMap({
           communes={communes}
           communesByName={communesByName}
           selectedCommune={selectedCommune}
+          isDark={isDark}
         />
       )}
 
