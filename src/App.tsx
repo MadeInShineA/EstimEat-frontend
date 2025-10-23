@@ -89,6 +89,8 @@ function App() {
   // Handle entering the app
   const handleEnterApp = useCallback(() => {
     setShowLanding(false);
+    // Preload HeatMap component for faster loading
+    import('./components/HeatMap');
   }, []);
 
   // Handle theme toggle

@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 export const Legend = memo(function Legend() {
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center justify-center gap-6">
       <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide whitespace-nowrap">Score Range:</span>
       
       {/* Compact horizontal legend items */}
