@@ -119,10 +119,15 @@ const CommunePolygons = memo(function CommunePolygons({
 }) {
   const map = useMap();
 
+  // Calculer la couleur directement dans le useMemo au lieu d'utiliser un state
+  const textColor = useMemo(() => isDark ? '#D1D5DB' : '#374151', [isDark]);
+
   // Memoize color function with improved gradient
   const getColor = useMemo(() => {
-    const min = Math.min(...communes.map(c => c.score));
-    const max = Math.max(...communes.map(c => c.score));
+    // Use displayScore if available, otherwise use score
+    const scores = communes.map((c:any) => c.displayScore || c.score);
+    const min = Math.min(...scores);
+    const max = Math.max(...scores);
 
     return (score: number | null | undefined) => {
       if (score == null) return 'rgb(30, 41, 59)';
@@ -130,15 +135,14 @@ const CommunePolygons = memo(function CommunePolygons({
       const clamped = Math.max(min, Math.min(max, score));
       const s = (clamped - min) / (max - min);
 
-      // Nouveau gradient professionnel: Bleu foncé → Cyan → Vert → Jaune/Orange → Rouge vif
       const stops = [
-        { stop: 0.0, color: [30, 58, 138] },    // Bleu foncé (indigo-900)
-        { stop: 0.2, color: [59, 130, 246] },   // Bleu vif (blue-500)
-        { stop: 0.4, color: [6, 182, 212] },    // Cyan (cyan-500)
-        { stop: 0.6, color: [34, 197, 94] },    // Vert (green-500)
-        { stop: 0.75, color: [251, 191, 36] },  // Jaune/Orange (amber-400)
-        { stop: 0.9, color: [249, 115, 22] },   // Orange vif (orange-500)
-        { stop: 1.0, color: [239, 68, 68] }     // Rouge vif (red-500)
+        { stop: 0.0, color: [30, 58, 138] },
+        { stop: 0.2, color: [59, 130, 246] },
+        { stop: 0.4, color: [6, 182, 212] },
+        { stop: 0.6, color: [34, 197, 94] },
+        { stop: 0.75, color: [251, 191, 36] },
+        { stop: 0.9, color: [249, 115, 22] },
+        { stop: 1.0, color: [239, 68, 68] }
       ];
 
       let i = 0;
@@ -160,12 +164,11 @@ const CommunePolygons = memo(function CommunePolygons({
       style: (feature: any) => {
         const name = feature.properties.NAME?.trim().toLowerCase();
         const communeMatch = communesByName[name];
-        const score = communeMatch ? communeMatch.score : 0;
-
-        // Check if this is the selected commune
-        const isSelected = selectedCommune &&
+        const score = communeMatch ? (communeMatch.displayScore || communeMatch.score) : 0;
+        
+        const isSelected = selectedCommune && 
           selectedCommune.name.trim().toLowerCase() === name;
-
+        
         return {
           fillColor: getColor(score),
           weight: isSelected ? 4 : 1.5,
@@ -179,82 +182,127 @@ const CommunePolygons = memo(function CommunePolygons({
         const name = feature.properties.NAME?.trim().toLowerCase();
         const communeMatch = communesByName[name];
         if (communeMatch) {
-          const scoreLabel = scoreType === 'total' ? 'Global Score' :
-            scoreType === 'third_sector_job_score' ? 'Third Sector Job Score' :
-              scoreType === 'building_score' ? 'Building Score' :
-                scoreType === 'demographie_score' ? 'Demography Score' :
-                  scoreType === 'restau_score' ? 'Restaurant Score' :
-                    scoreType === 'third_sector_establishment_score' ? 'Third Sector Establishment Score' : 'Score';
-
-          const textColor = isDark ? '#e5e7eb' : '#374151';
-
-          let tooltipContent = `
-            <div class="tooltip-content ${isDark ? 'dark' : 'light'}" style="z-index: 10000;">
-              <h3 class="tooltip-title">${communeMatch.name}</h3>
-              <div class="tooltip-stats" style="display: flex; flex-direction: column;">
-                <div class="tooltip-canton">
-                  <div class="tooltip-label">Canton</div>
-                  <div class="tooltip-value">${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</div>
+          const displayScore = communeMatch.displayScore || communeMatch.score;
+          const scoreLabel = scoreType === 'total_score' ? 'Global Score' : scoreType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          
+          // Fonction pour générer le popup dynamiquement
+          const generatePopup = () => {
+            const currentTextColor = isDark ? '#D1D5DB' : '#374151';
+            const currentBgGradient = isDark 
+              ? 'linear-gradient(135deg, #1e293b 0%, #334155 100%)'
+              : 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)';
+            const currentBorderColor = isDark ? 'rgba(16, 185, 129, 0.3)' : 'rgba(16, 185, 129, 0.2)';
+            
+            let popup = `
+              <div style="font-family: system-ui, -apple-system, sans-serif; background: ${currentBgGradient}; border-radius: 12px; padding: 16px; border: 1px solid ${currentBorderColor}; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);">
+                <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: 700; color: ${currentTextColor}; border-bottom: 2px solid rgba(16, 185, 129, 0.3); padding-bottom: 8px;">${communeMatch.name}</h3>
+                <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+                  <div>
+                    <p style="margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: ${currentTextColor}; opacity: 0.7; font-weight: 600;">Canton</p>
+                    <p style="margin: 4px 0 0 0; font-size: 14px; font-weight: 600; color: #10b981;">${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</p>
+                  </div>
+                  <div>
+                    <p style="margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: ${currentTextColor}; opacity: 0.7; font-weight: 600;">${scoreLabel}</p>
+                    <p style="margin: 4px 0 0 0; font-size: 18px; font-weight: 700; color: #10b981;">${displayScore.toFixed(1)}</p>
+                  </div>
                 </div>
-                <div class="tooltip-score-main">
-                  <div class="tooltip-label">${scoreLabel}</div>
-                  <div class="tooltip-value">${communeMatch.score.toFixed(1)}</div>
-                </div>
-              </div>`;
+            `;
+            
+            if (scoreType === 'total_score') {
+              popup += `
+                <h4 style="color: ${currentTextColor}; margin: 12px 0 8px 0; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Score Details</h4>
+                <ul style="margin: 0; padding-left: 20px; list-style: disc;">
+                  <li style="margin: 4px 0; color: ${currentTextColor}; font-size: 13px;">Third Sector Job: <strong>${(communeMatch.third_sector_job_score || 0).toFixed(1)}</strong></li>
+                  <li style="margin: 4px 0; color: ${currentTextColor}; font-size: 13px;">Building: <strong>${(communeMatch.building_score || 0).toFixed(1)}</strong></li>
+                  <li style="margin: 4px 0; color: ${currentTextColor}; font-size: 13px;">Demography: <strong>${(communeMatch.demographie_score || 0).toFixed(1)}</strong></li>
+                  <li style="margin: 4px 0; color: ${currentTextColor}; font-size: 13px;">Restaurant: <strong>${(communeMatch.restau_score || 0).toFixed(1)}</strong></li>
+                  <li style="margin: 4px 0; color: ${currentTextColor}; font-size: 13px;">Third Sector Establishment: <strong>${(communeMatch.third_sector_establishment_score || 0).toFixed(1)}</strong></li>
+                </ul>`;
+            }
+            popup += `</div>`;
+            return popup;
+          };
 
-          if (scoreType === 'total') {
-            tooltipContent += `
-              <h4 class="tooltip-scores-title" style="color: ${textColor};">Score Details</h4>
-              <ul style="margin: 8px 0 0 0; padding-left: 20px; list-style: disc;">
-                <li style="margin: 4px 0; color: ${textColor};">Third Sector Job: ${(communeMatch.third_sector_job_score || 0).toFixed(1)}</li>
-                <li style="margin: 4px 0; color: ${textColor};">Building: ${(communeMatch.building_score || 0).toFixed(1)}</li>
-                <li style="margin: 4px 0; color: ${textColor};">Demography: ${(communeMatch.demographie_score || 0).toFixed(1)}</li>
-                <li style="margin: 4px 0; color: ${textColor};">Restaurant: ${(communeMatch.restau_score || 0).toFixed(1)}</li>
-                <li style="margin: 4px 0; color: ${textColor};">Third Sector Est.: ${(communeMatch.third_sector_establishment_score || 0).toFixed(1)}</li>
-              </ul>`;
-          }
-
-          tooltipContent += `
-            </div>`;
-
-          layer.bindTooltip(tooltipContent, {
+          // Bind le tooltip avec le contenu initial
+          layer.bindTooltip(generatePopup(), {
             className: 'custom-tooltip',
             direction: 'top',
-            opacity: 1,
-            permanent: false,
-            sticky: false
+            opacity: 1
           });
         }
 
-        layer.on({
-          mouseover: (e) => {
-            const name = feature.properties.NAME?.trim().toLowerCase();
-            const isSelected = selectedCommune &&
-              selectedCommune.name.trim().toLowerCase() === name;
-
-            if (!isSelected) {
-              e.target.setStyle({
-                weight: 3,
-                fillOpacity: 0.95,
-                color: 'rgba(16, 185, 129, 0.9)'
-              });
-            }
-            e.target.openPopup();
-          },
-          mouseout: (e) => {
-            geoJsonLayer.resetStyle(e.target);
-            e.target.closePopup();
-          },
-        });
+       layer.on({
+  mouseover: (e) => {
+        const name = feature.properties.NAME?.trim().toLowerCase();
+        const isSelected = selectedCommune && 
+          selectedCommune.name.trim().toLowerCase() === name;
+        
+        if (!isSelected) {
+          e.target.setStyle({
+            weight: 3,
+            fillOpacity: 0.95,
+            color: 'rgba(16, 185, 129, 0.9)'
+          });
+        }
+        
+        // Régénérer le popup avec les couleurs actuelles à chaque hover
+        const communeMatch = communesByName[name];
+        if (communeMatch) {
+          const displayScore = communeMatch.displayScore || communeMatch.score;
+          const scoreLabel = scoreType === 'total_score' ? 'Global Score' : scoreType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          
+          const currentTextColor = isDark ? '#D1D5DB' : '#374151';
+          const currentBgGradient = isDark 
+            ? 'linear-gradient(135deg, #1e293b 0%, #334155 100%)'
+            : 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)';
+          const currentBorderColor = isDark ? 'rgba(16, 185, 129, 0.3)' : 'rgba(16, 185, 129, 0.2)';
+          
+          let popup = `
+            <div style="font-family: system-ui, -apple-system, sans-serif; background: ${currentBgGradient}; border-radius: 12px; padding: 16px; border: 1px solid ${currentBorderColor}; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);">
+              <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: 700; color: ${currentTextColor}; border-bottom: 2px solid rgba(16, 185, 129, 0.3); padding-bottom: 8px;">${communeMatch.name}</h3>
+              
+              <div style="margin-bottom: 12px;">
+                <p style="margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: ${currentTextColor}; opacity: 0.7; font-weight: 600;">Canton</p>
+                <p style="margin: 4px 0 0 0; font-size: 14px; font-weight: 600; color: #10b981;">${getCantonName(communeMatch.geo.properties.KANTONSNUM)}</p>
+              </div>
+              
+              <div style="margin-bottom: 12px;">
+                <p style="margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: ${currentTextColor}; opacity: 0.7; font-weight: 600;">${scoreLabel}</p>
+                <p style="margin: 4px 0 0 0; font-size: 22px; font-weight: 700; color: #10b981;">${displayScore.toFixed(1)}</p>
+              </div>
+          `;
+          
+          if (scoreType === 'total_score') {
+            popup += `
+              <h4 style="color: ${currentTextColor}; margin: 12px 0 8px 0; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Score Details</h4>
+              <ul style="margin: 0; padding-left: 20px; list-style: disc;">
+                <li style="margin: 4px 0; color: ${currentTextColor}; font-size: 13px;">Third Sector Job: <strong>${(communeMatch.third_sector_job_score || 0).toFixed(1)}</strong></li>
+                <li style="margin: 4px 0; color: ${currentTextColor}; font-size: 13px;">Building: <strong>${(communeMatch.building_score || 0).toFixed(1)}</strong></li>
+                <li style="margin: 4px 0; color: ${currentTextColor}; font-size: 13px;">Demography: <strong>${(communeMatch.demographie_score || 0).toFixed(1)}</strong></li>
+                <li style="margin: 4px 0; color: ${currentTextColor}; font-size: 13px;">Restaurant: <strong>${(communeMatch.restau_score || 0).toFixed(1)}</strong></li>
+                <li style="margin: 4px 0; color: ${currentTextColor}; font-size: 13px;">Third Sector Establishment: <strong>${(communeMatch.third_sector_establishment_score || 0).toFixed(1)}</strong></li>
+              </ul>`;
+          }
+          popup += `</div>`;
+          
+          // Mettre à jour le contenu du tooltip
+          e.target.setTooltipContent(popup);
+        }
+        
+        e.target.openTooltip();
+      },
+      mouseout: (e) => {
+        geoJsonLayer.resetStyle(e.target);
+        e.target.closeTooltip();
+      },
+    });
       },
     }).addTo(map);
 
     return () => {
       map.removeLayer(geoJsonLayer);
     };
-  }, [geoJsonData, communesByName, map, communes, getColor, selectedCommune, isDark]);
-
-
+  }, [geoJsonData, communesByName, map, communes, getColor, selectedCommune, scoreType, isDark]);
 
   return null;
 });

@@ -28,4 +28,3 @@ export interface Commune {
   third_sector_establishment_score?: number;
   total_score?: number;
 }
-
