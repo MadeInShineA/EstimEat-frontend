@@ -48,7 +48,7 @@ const FullscreenButton = memo(function FullscreenButton({ isDark }: { isDark: bo
   return (
     <button
       onClick={toggleFullscreen}
-      className={`absolute top-2 right-2 z-[1000] p-2 rounded-md shadow-md transition-colors ${
+      className={`absolute top-2 right-2 md:top-4 md:right-4 z-[1000] p-2 rounded-md shadow-md transition-colors ${
         isDark
           ? 'bg-gray-800 text-white hover:bg-gray-700 border border-gray-600'
           : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'

@@ -44,7 +44,7 @@ export function AdvancedFeaturesSection({ isVisible }: AdvancedFeaturesSectionPr
           {advancedFeatures.map((feature, index) => (
             <div
               key={feature.title}
-              className={`group p-8 glass dark:glass-dark rounded-3xl hover:scale-105 transition-all duration-500 shadow-lg hover:shadow-2xl border border-white/20 dark:border-gray-600/20 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`group p-6 md:p-8 glass dark:glass-dark rounded-3xl hover:scale-105 transition-all duration-500 shadow-lg hover:shadow-2xl border border-white/20 dark:border-gray-600/20 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: `${(index + 4) * 100}ms` }}
             >
               <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">

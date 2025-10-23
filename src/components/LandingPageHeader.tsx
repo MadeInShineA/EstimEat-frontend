@@ -19,7 +19,7 @@ export function LandingPageHeader({ isDark = false, onToggleTheme, onEnterApp }:
               <div className="absolute -inset-1 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-2xl blur opacity-30"></div>
             </div>
             <div>
-              <h1 className="text-3xl font-black bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent animate-gradient">
+              <h1 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent animate-gradient">
                 EstimEat
               </h1>
               <p className="text-base text-slate-500 dark:text-slate-400 mt-1 font-medium">

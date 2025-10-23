@@ -165,7 +165,7 @@ function App() {
                 id="score-type-select"
                 value={scoreType}
                 onChange={(e) => setScoreType(e.target.value)}
-                className="block w-auto glass dark:glass-dark rounded-xl border border-white/30 dark:border-gray-600/30 py-2 px-3 text-sm shadow-lg hover:shadow-xl transition-all duration-300 focus-modern text-slate-900 dark:text-slate-100"
+                className="block w-full md:w-auto glass dark:glass-dark rounded-xl border border-white/30 dark:border-gray-600/30 py-2 px-3 text-sm shadow-lg hover:shadow-xl transition-all duration-300 focus-modern text-slate-900 dark:text-slate-100"
               >
                 <option value="total" className="text-slate-900 dark:text-slate-100 bg-white dark:bg-gray-800">Global Score</option>
                 <option value="third_sector_job_score" className="text-slate-900 dark:text-slate-100 bg-white dark:bg-gray-800">Third Sector Job</option>
@@ -177,8 +177,8 @@ function App() {
             </div>
           </div>
 
-          {/* Top Communes Horizontal - Hidden on small screens */}
-          <div className="hidden lg:flex flex-1 overflow-hidden">
+          {/* Top Communes */}
+          <div className="flex-1">
             <Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 rounded h-8 w-32"></div>}>
               <TopCommunes communes={communesWithScore} communesByName={communesByName} topN={3} />
             </Suspense>
