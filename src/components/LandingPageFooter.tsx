@@ -21,7 +21,7 @@ export function LandingPageFooter() {
 
           <div className="flex items-center gap-6">
             <a
-              href="https://github.com"
+              href="https://github.com/MadeInShineA/EstimEat"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200"
