@@ -22,7 +22,7 @@ export function useCommunes() {
       try {
         setLoading(true);
 
-        const response = await fetch('/data/models_output/locality_scores.csv');
+        const response = await fetch('/data/locality_scores.csv');
         if (!response.ok) throw new Error('Failed to fetch locality_scores.csv');
         const csvText = await response.text();
 
