@@ -158,6 +158,7 @@ function App() {
               rawCommunes={communesWithScore}
               communesByName={communesByName}
               onSelect={handleCommuneSelect}
+              isDark={isDark}
             />
             <div className="w-full sm:w-auto">
               <label htmlFor="score-type-select" className="sr-only">Score Type</label>
@@ -178,11 +179,11 @@ function App() {
           </div>
 
           {/* Top Communes */}
-          <div className="flex-1">
-            <Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 rounded h-8 w-32"></div>}>
-              <TopCommunes communes={communesWithScore} communesByName={communesByName} topN={3} />
-            </Suspense>
-          </div>
+            <div className="flex-1">
+              <Suspense fallback={<div className="animate-pulse bg-gray-200 dark:bg-gray-700 rounded h-8 w-32"></div>}>
+                <TopCommunes communes={communesWithScore} communesByName={communesByName} topN={3} onSelect={handleCommuneSelect} isDark={isDark} scoreType={scoreType} />
+              </Suspense>
+            </div>
         </div>
       </div>
 
