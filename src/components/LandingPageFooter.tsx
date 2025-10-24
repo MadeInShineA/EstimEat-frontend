@@ -43,11 +43,6 @@ export function LandingPageFooter() {
             <p className="text-sm text-slate-500 dark:text-slate-400">
               © 2025 EstimEat. Data sourced from official Swiss federal statistics.
             </p>
-            <div className="flex items-center gap-6 text-sm text-slate-500 dark:text-slate-400">
-              <a href="#" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                Data Sources
-              </a>
-            </div>
           </div>
         </div>
       </div>

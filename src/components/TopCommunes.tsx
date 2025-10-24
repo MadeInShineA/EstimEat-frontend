@@ -21,8 +21,27 @@ export const TopCommunes = memo(function TopCommunes({
   onSelect
 }: TopCommunesProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  
-  const sorted = useMemo(() => 
+
+  const getScoreTypeDisplay = (type: string) => {
+    switch (type) {
+      case 'total':
+        return 'Total';
+      case 'third_sector_job_score':
+        return 'Third Sector Jobs';
+      case 'building_score':
+        return 'New Buildings';
+      case 'demographie_score':
+        return 'Demography';
+      case 'restau_score':
+        return 'Restaurants';
+      case 'third_sector_establishment_score':
+        return 'Third Sector Establishments';
+      default:
+        return type;
+    }
+  };
+
+  const sorted = useMemo(() =>
     [...communes].sort((a, b) => (b.score) - (a.score)).slice(0, topN),
     [communes, topN]
   );
@@ -84,9 +103,8 @@ export const TopCommunes = memo(function TopCommunes({
           <div className="flex items-center gap-1">
             <button
               onClick={prevSlide}
-              className={`p-1.5 rounded-lg transition-colors ${
-                isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'
-              }`}
+              className={`p-1.5 rounded-lg transition-colors ${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'
+                }`}
               aria-label="Previous"
             >
               <ChevronLeft className={`w-4 h-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`} />
@@ -96,18 +114,17 @@ export const TopCommunes = memo(function TopCommunes({
             </span>
             <button
               onClick={nextSlide}
-              className={`p-1.5 rounded-lg transition-colors ${
-                isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'
-              }`}
+              className={`p-1.5 rounded-lg transition-colors ${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'
+                }`}
               aria-label="Next"
             >
               <ChevronRight className={`w-4 h-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`} />
             </button>
           </div>
         </div>
-        
+
         <div className="relative overflow-hidden">
-          <div 
+          <div
             className="flex transition-transform duration-300 ease-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
@@ -116,11 +133,10 @@ export const TopCommunes = memo(function TopCommunes({
               return (
                 <div key={c.id} className="w-full flex-shrink-0 px-1">
                   <div
-                    className={`flex items-center gap-3 p-3 rounded-xl shadow-lg transition-all cursor-pointer ${
-                      isDark
+                    className={`flex items-center gap-3 p-3 rounded-xl shadow-lg transition-all cursor-pointer ${isDark
                         ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:bg-gradient-to-br hover:from-gray-700 hover:to-gray-800'
                         : 'bg-gradient-to-br from-white to-gray-50 border border-gray-200 hover:bg-gradient-to-br hover:from-gray-50 hover:to-white'
-                    } ${style.ring} ${style.hover}`}
+                      } ${style.ring} ${style.hover}`}
                     onClick={() => onSelect?.(c)}
                   >
                     <div className="flex-shrink-0">{getIcon(idx)}</div>
@@ -136,6 +152,9 @@ export const TopCommunes = memo(function TopCommunes({
                       <div className="text-xl font-bold text-emerald-600 tabular-nums">
                         {(c.score).toFixed(1)}
                       </div>
+                      <div className={`text-xs mt-0.5 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                        {getScoreTypeDisplay(scoreType)}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -143,19 +162,18 @@ export const TopCommunes = memo(function TopCommunes({
             })}
           </div>
         </div>
-        
+
         <div className="flex items-center justify-center gap-1.5 mt-2">
           {sorted.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`h-1.5 rounded-full transition-all ${
-                idx === currentIndex 
-                  ? 'w-6 bg-emerald-600' 
-                  : isDark 
+              className={`h-1.5 rounded-full transition-all ${idx === currentIndex
+                  ? 'w-6 bg-emerald-600'
+                  : isDark
                     ? 'w-1.5 bg-gray-600 hover:bg-gray-500'
                     : 'w-1.5 bg-gray-300 hover:bg-gray-400'
-              }`}
+                }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
@@ -170,7 +188,7 @@ export const TopCommunes = memo(function TopCommunes({
           </span>
           <div className={`h-px flex-1 ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}></div>
         </div>
-        
+
         {/* Horizontal compact layout */}
         <div className="flex gap-2">
           {sorted.map((c, idx) => {
@@ -178,44 +196,42 @@ export const TopCommunes = memo(function TopCommunes({
             return (
               <div
                 key={c.id}
-                className={`flex-1 relative flex items-center gap-2 p-2.5 rounded-lg shadow-sm transition-all group cursor-pointer ${
-                  isDark
+                className={`flex-1 relative flex items-center gap-2 p-2.5 rounded-lg shadow-sm transition-all group cursor-pointer ${isDark
                     ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-emerald-600 hover:bg-gradient-to-br hover:from-gray-700 hover:to-gray-800'
                     : 'bg-gradient-to-br from-white to-gray-50 border border-gray-200 hover:border-emerald-300 hover:bg-gradient-to-br hover:from-gray-50 hover:to-white'
-                } ${style.ring} ${style.hover}`}
+                  } ${style.ring} ${style.hover}`}
                 onClick={() => onSelect?.(c)}
               >
                 {/* Badge rank */}
                 <div className={`absolute -top-1.5 -left-1.5 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shadow-md ${style.badge}`}>
                   {idx + 1}
                 </div>
-                
+
                 {/* Icon */}
                 <div className="flex-shrink-0 ml-1">
                   {getIcon(idx)}
                 </div>
-                
+
                 {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <h4 className={`font-semibold text-xs truncate transition-colors ${
-                    isDark
+                  <h4 className={`font-semibold text-xs truncate transition-colors ${isDark
                       ? 'text-white group-hover:text-emerald-400'
                       : 'text-gray-900 group-hover:text-emerald-600'
-                  }`}>
+                    }`}>
                     {c.name}
                   </h4>
                   <p className={`text-xs truncate ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
                     {getCantonName(communesByName[c.name.trim().toLowerCase()]?.geo?.properties?.KANTONSNUM)}
                   </p>
                 </div>
-                
+
                 {/* Score */}
                 <div className="flex-shrink-0 text-right">
                   <div className="text-lg font-bold text-emerald-600 tabular-nums leading-none">
                     {(c.score).toFixed(1)}
                   </div>
                   <div className={`text-xs mt-0.5 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-                    {scoreType === 'total' ? 'total' : scoreType.slice(0, 8)}
+                    {getScoreTypeDisplay(scoreType)} Score
                   </div>
                 </div>
               </div>

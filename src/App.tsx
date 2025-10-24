@@ -208,7 +208,7 @@ function App() {
       {/* Bottom Banner - Legend */}
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-t border-gray-200/50 dark:border-gray-700/50 px-4 sm:px-6 lg:px-8 py-3 shadow-lg z-10 transition-colors duration-500">
         <div className="max-w-[1800px] mx-auto">
-          <Legend />
+          <Legend isDark={isDark} />
         </div>
       </div>
     </div>

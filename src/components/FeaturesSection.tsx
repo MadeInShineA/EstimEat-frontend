@@ -1,4 +1,4 @@
-import { MapPin, TrendingUp, BarChart3, Search, Layers, Zap } from 'lucide-react';
+import { MapPin, Users, Building, Briefcase, Factory, Utensils } from 'lucide-react';
 
 interface FeaturesSectionProps {
   isVisible: boolean;
@@ -8,33 +8,33 @@ export function FeaturesSection({ isVisible }: FeaturesSectionProps) {
   const features = [
     {
       icon: MapPin,
-      title: 'Interactive Maps',
+      title: 'Interactive Map',
       description: 'Explore Swiss communes with our interactive heatmaps and detailed geographic data visualization.'
     },
     {
-      icon: TrendingUp,
-      title: 'Growth Analytics',
-      description: 'Track population trends, economic indicators, and demographic shifts over time.'
+      icon: Users,
+      title: 'Demography per City',
+      description: 'Detailed demographic data and population statistics for each Swiss commune.'
     },
     {
-      icon: BarChart3,
-      title: 'Data Insights',
-      description: 'Access comprehensive statistics and analytics for informed decision making.'
+      icon: Building,
+      title: 'New Buildings',
+      description: 'Track construction trends and new building developments across communes.'
     },
     {
-      icon: Search,
-      title: 'Smart Search',
-      description: 'Find communes quickly with our intelligent search and filtering capabilities.'
+      icon: Briefcase,
+      title: 'Third Sector Jobs',
+      description: 'Detailed data on jobs in the third sector across Swiss communes.'
     },
     {
-      icon: Layers,
-      title: 'Layered Data',
-      description: 'View multiple data layers simultaneously for comprehensive analysis.'
+      icon: Factory,
+      title: 'Third Sector Establishments',
+      description: 'Information on establishments in the third sector for economic analysis.'
     },
     {
-      icon: Zap,
-      title: 'Real-time Updates',
-      description: 'Stay current with the latest commune data and trend information.'
+      icon: Utensils,
+      title: 'Restaurants Growth',
+      description: 'Monitor the growth in number of restaurants and dining establishments over time.'
     }
   ];
 

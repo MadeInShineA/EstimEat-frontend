@@ -3,7 +3,6 @@ import { LandingPageHeader } from './LandingPageHeader';
 import { HeroSection } from './HeroSection';
 import { StatsSection } from './StatsSection';
 import { FeaturesSection } from './FeaturesSection';
-import { AdvancedFeaturesSection } from './AdvancedFeaturesSection';
 import { CTASection } from './CTASection';
 import { LandingPageFooter } from './LandingPageFooter';
 
@@ -48,7 +47,6 @@ export function LandingPage({ onEnterApp, isDark = false, onToggleTheme }: Landi
           <HeroSection isVisible={isVisible} onEnterApp={onEnterApp} />
           <StatsSection isVisible={isVisible} />
           <FeaturesSection isVisible={isVisible} />
-          <AdvancedFeaturesSection isVisible={isVisible} />
           <CTASection isVisible={isVisible} onEnterApp={onEnterApp} />
         </main>
 
