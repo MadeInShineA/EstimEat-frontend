@@ -1,14 +1,18 @@
-# EstimEat - Swiss Commune Analytics
+# EstimEat Frontend - Restaurant Location Intelligence
 
-A modern, interactive web application for exploring Swiss commune population trends and demographic data. Built with React, TypeScript, and Leaflet for comprehensive geospatial analysis.
+This is the frontend repository for the EstimEat project, a data-driven platform helping restaurant owners find the best locations to open their businesses in Swiss communes. Built with React, TypeScript, and Leaflet for comprehensive geospatial analysis and location intelligence.
 
 ## Features
 
-- **Interactive Heat Maps**: Visualize commune data with dynamic heatmaps and custom markers
+- **Interactive Map**: Explore Swiss communes with interactive heatmaps and detailed geographic data visualization
+- **Demography per City**: Detailed demographic data and population statistics for each Swiss commune
+- **New Buildings**: Track construction trends and new building developments across communes
+- **Third Sector Jobs**: Detailed data on jobs in the third sector across Swiss communes
+- **Third Sector Establishments**: Information on establishments in the third sector for economic analysis
+- **Restaurants Growth**: Monitor the growth in number of restaurants and dining establishments over time
 - **Real-time Search**: Find communes instantly with intelligent search functionality
 - **Dark Mode**: Full dark theme support with smooth transitions
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **Data Analytics**: Access population growth, economic indicators, and trend analysis
 - **Modern UI**: Glassmorphism effects, smooth animations, and professional design
 
 ## Tech Stack
