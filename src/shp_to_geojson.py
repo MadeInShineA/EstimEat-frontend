@@ -1,12 +1,10 @@
 import geopandas as gpd
 import fiona
 
-# Chemin vers ton fichier GeoPackage (.gpkg)
 gpkg_path = "./swissboundaries3d_2024-01_2056_5728.shp/"
 
-# Lister les couches (layers) disponibles
 layers = fiona.listlayers(gpkg_path)
-print("Layers disponibles :", layers)
+print("Available layers :", layers)
 
 
 layer_name = "swissBOUNDARIES3D_1_5_TLM_HOHEITSGEBIET"
@@ -18,6 +16,5 @@ print(communes.columns)
 output_path = "communes.geojson"
 communes.to_file(output_path, driver="GeoJSON")
 
-print(f"✅ Export terminé : {output_path}")
-print("Nombre de communes exportées :", len(communes))
-print("Colonnes disponibles :", list(communes.columns))
+print("Number of communes exported :", len(communes))
+print("Available columns:", list(communes.columns))
